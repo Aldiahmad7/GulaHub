@@ -1,33 +1,6 @@
-<!DOCTYPE html>
-<html lang="id">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GulaHub</title>
-    @vite(['resources/css/app.css'])
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-</head>
-<body class="bg-gray-50">
-    <!-- Navbar -->
-    <nav class="bg-white shadow-lg fixed w-full z-50 top-0">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between items-center h-16">
-                <div class="flex items-center">
-                    <div class="flex-shrink-0 flex items-center">
-                        <i class="fas fa-seedling text-green-600 text-2xl mr-2"></i>
-                        <span class="text-2xl font-bold text-green-700">GulaHub</span>
-                    </div>
-                </div>
-                <div class="flex items-center space-x-4">
-                    <a href="#" class="bg-green-600 hover:bg-green-700 text-white px-6 py-2 rounded-lg font-medium transition duration-300">
-                        Login
-                    </a>
-                </div>
-            </div>
-        </div>
-    </nav>
+@extends('layouts.app')
 
-    <!-- Hero Section -->
+@section('content')
     <section class="pt-20 pb-16 bg-gradient-to-br from-green-50 to-green-100">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center">
@@ -35,7 +8,7 @@
                     GulaHub
                 </h1>
                 <p class="text-xl md:text-2xl text-green-700 mb-8 max-w-3xl mx-auto">
-                    Platform Digital untuk Mempermudah Distribusi Tebu dari Petani ke Pabrik Gula
+                    Platform Digital untuk Mempermudah Distribusi antara Petani Tebu dan Pabrik Gula
                 </p>
                 <p class="text-lg text-gray-600 mb-10 max-w-2xl mx-auto">
                     Menghubungkan petani tebu dengan pabrik gula melalui sistem yang terintegrasi, transparan, dan efisien untuk meningkatkan produktivitas industri gula Indonesia.
@@ -70,7 +43,7 @@
                         <i class="fas fa-handshake text-green-600 text-2xl"></i>
                     </div>
                     <h3 class="text-xl font-semibold text-gray-900 mb-3">Kolaborasi Mudah</h3>
-                    <p class="text-gray-600">Menghubungkan petani dan pabrik secara langsung untuk transaksi yang lebih efisien dan transparan.</p>
+                    <p class="text-gray-600">Lorem ipsum dolor sit amet consectetur adipisicing elit. Sed laborum dolorem aperiam odio. Sint molestiae quos asperiores, quas similique ducimus.</p>
                 </div>
 
                 <div class="text-center p-6 rounded-lg border border-green-100 hover:shadow-lg transition duration-300">
@@ -78,7 +51,7 @@
                         <i class="fas fa-chart-line text-green-600 text-2xl"></i>
                     </div>
                     <h3 class="text-xl font-semibold text-gray-900 mb-3">Dashboard Lengkap</h3>
-                    <p class="text-gray-600">Monitoring real-time dengan statistik dan grafik untuk memantau performa dan riwayat transaksi.</p>
+                    <p class="text-gray-600">Lorem ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis voluptatum quis doloribus quas sapiente autem cumque quo reprehenderit earum deserunt.</p>
                 </div>
 
                 <div class="text-center p-6 rounded-lg border border-green-100 hover:shadow-lg transition duration-300">
@@ -86,7 +59,7 @@
                         <i class="fas fa-shield-alt text-green-600 text-2xl"></i>
                     </div>
                     <h3 class="text-xl font-semibold text-gray-900 mb-3">Sistem Terpercaya</h3>
-                    <p class="text-gray-600">Dilengkapi dengan sistem admin untuk verifikasi dan menjaga kualitas pengguna platform.</p>
+                    <p class="text-gray-600">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Sint, eligendi. Sequi voluptatibus numquam ad est omnis debitis soluta nam non!</p>
                 </div>
             </div>
         </div>
@@ -100,9 +73,6 @@
                     <h2 class="text-3xl md:text-4xl font-bold text-green-800 mb-6">
                         Fitur untuk Petani
                     </h2>
-                    <p class="text-lg text-gray-600 mb-8">
-                        Kelola hasil panen tebu Anda dengan mudah dan hubungkan langsung dengan pabrik gula terdekat.
-                    </p>
                     <div class="space-y-6">
                         <div class="flex items-start">
                             <div class="bg-green-600 w-8 h-8 rounded-full flex items-center justify-center mr-4 mt-1">
@@ -240,31 +210,4 @@
             </div>
         </div>
     </section>
-
-    <script>
-        // Smooth scrolling for anchor links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
-            });
-        });
-
-        // Add scroll effect to navbar
-        window.addEventListener('scroll', function() {
-            const navbar = document.querySelector('nav');
-            if (window.scrollY > 10) {
-                navbar.classList.add('shadow-xl');
-            } else {
-                navbar.classList.remove('shadow-xl');
-            }
-        });
-    </script>
-</body>
-</html>
+@endsection
