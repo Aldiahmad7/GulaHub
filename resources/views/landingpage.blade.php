@@ -14,10 +14,10 @@
                     Menghubungkan petani tebu dengan pabrik gula melalui sistem yang terintegrasi, transparan, dan efisien untuk meningkatkan produktivitas industri gula Indonesia.
                 </p>
                 <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                    <a href="#" class="bg-green-600 hover:bg-green-700 text-white px-8 py-3 rounded-lg font-semibold text-lg transition duration-300 shadow-lg">
+                    <a href="{{ route('registerPetani') }}" class="bg-green-600 hover:bg-green-700 text-white px-8 py-3 rounded-lg font-semibold text-lg transition duration-300 shadow-lg">
                         Daftar sebagai Petani
                     </a>
-                    <a href="#" class="bg-white hover:bg-gray-50 text-green-600 border-2 border-green-600 px-8 py-3 rounded-lg font-semibold text-lg transition duration-300 shadow-lg">
+                    <a href="{{ route('registerPabrik') }}" class="bg-white hover:bg-gray-50 text-green-600 border-2 border-green-600 px-8 py-3 rounded-lg font-semibold text-lg transition duration-300 shadow-lg">
                         Daftar sebagai Pabrik
                     </a>
                 </div>
@@ -25,7 +25,6 @@
         </div>
     </section>
 
-    <!-- Features Overview -->
     <section class="py-16 bg-white">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-16">
@@ -65,7 +64,6 @@
         </div>
     </section>
 
-    <!-- Features for Farmers -->
     <section class="py-16 bg-green-50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid lg:grid-cols-2 gap-12 items-center">
@@ -75,27 +73,18 @@
                     </h2>
                     <div class="space-y-6">
                         <div class="flex items-start">
-                            <div class="bg-green-600 w-8 h-8 rounded-full flex items-center justify-center mr-4 mt-1">
-                                <i class="fas fa-calendar-alt text-white text-sm"></i>
-                            </div>
                             <div>
                                 <h3 class="text-lg font-semibold text-gray-900 mb-2">Manajemen Rencana Panen</h3>
                                 <p class="text-gray-600">Input, ubah, dan hapus rencana panen dengan detail jenis tebu, total panen, dan tanggal panen.</p>
                             </div>
                         </div>
                         <div class="flex items-start">
-                            <div class="bg-green-600 w-8 h-8 rounded-full flex items-center justify-center mr-4 mt-1">
-                                <i class="fas fa-paper-plane text-white text-sm"></i>
-                            </div>
                             <div>
                                 <h3 class="text-lg font-semibold text-gray-900 mb-2">Permintaan Setor Tebu</h3>
                                 <p class="text-gray-600">Terima atau tolak permintaan dari pabrik untuk setor tebu hasil panen Anda.</p>
                             </div>
                         </div>
                         <div class="flex items-start">
-                            <div class="bg-green-600 w-8 h-8 rounded-full flex items-center justify-center mr-4 mt-1">
-                                <i class="fas fa-clock text-white text-sm"></i>
-                            </div>
                             <div>
                                 <h3 class="text-lg font-semibold text-gray-900 mb-2">Jadwal Giling & Riwayat</h3>
                                 <p class="text-gray-600">Lihat jadwal giling pabrik dan riwayat lengkap setor tebu yang sukses maupun gagal.</p>
@@ -109,21 +98,19 @@
                     </div>
                     <h3 class="text-2xl font-bold text-center text-gray-900 mb-4">Dashboard Petani</h3>
                     <p class="text-center text-gray-600 mb-6">Pantau statistik panen dan permintaan setor tebu dalam satu dashboard yang komprehensif.</p>
-                    {{-- <div class="bg-green-50 p-4 rounded-lg">
-                        <div class="flex justify-between items-center mb-2">
-                            <span class="text-sm text-gray-600">Total Panen Bulan Ini</span>
-                            <span class="text-sm font-semibold text-green-600">15.5 Ton</span>
+                    <div class="space-y-4">
+                        <div class="bg-white p-4 rounded-lg shadow">
+                            <div class="flex justify-between items-center">
+                                <span class="text-sm text-gray-600">Petani Terdaftar</span>
+                                <span class="text-sm font-semibold text-green-600">127 Petani</span>
+                            </div>
                         </div>
-                        <div class="w-full bg-green-200 rounded-full h-2">
-                            <div class="bg-green-600 h-2 rounded-full" style="width: 78%"></div>
-                        </div>
-                    </div> --}}
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Features for Factory -->
     <section class="py-16 bg-white">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid lg:grid-cols-2 gap-12 items-center">
@@ -133,51 +120,33 @@
                     </div>
                     <h3 class="text-2xl font-bold text-center text-gray-900 mb-4">Dashboard Pabrik</h3>
                     <p class="text-center text-gray-600 mb-6">Kelola kebutuhan tebu dan jadwal giling dengan sistem yang terintegrasi.</p>
-                    {{-- <div class="space-y-4">
+                    <div class="space-y-4">
                         <div class="bg-white p-4 rounded-lg shadow">
                             <div class="flex justify-between items-center">
-                                <span class="text-sm text-gray-600">Kebutuhan Tebu Hari Ini</span>
-                                <span class="text-sm font-semibold text-green-600">45 Ton</span>
+                                <span class="text-sm text-gray-600">Pabrik Terdaftar</span>
+                                <span class="text-sm font-semibold text-green-600">127 Pabrik</span>
                             </div>
                         </div>
-                        <div class="bg-white p-4 rounded-lg shadow">
-                            <div class="flex justify-between items-center">
-                                <span class="text-sm text-gray-600">Petani Terdaftar</span>
-                                <span class="text-sm font-semibold text-green-600">127 Petani</span>
-                            </div>
-                        </div>
-                    </div> --}}
+                    </div>
                 </div>
                 <div>
                     <h2 class="text-3xl md:text-4xl font-bold text-green-800 mb-6">
                         Fitur untuk Pabrik
                     </h2>
-                    <p class="text-lg text-gray-600 mb-8">
-                        Optimalisasi kebutuhan tebu dengan koneksi langsung ke petani untuk supply chain yang efisien.
-                    </p>
                     <div class="space-y-6">
                         <div class="flex items-start">
-                            <div class="bg-green-600 w-8 h-8 rounded-full flex items-center justify-center mr-4 mt-1">
-                                <i class="fas fa-cogs text-white text-sm"></i>
-                            </div>
                             <div>
                                 <h3 class="text-lg font-semibold text-gray-900 mb-2">Manajemen Jadwal Giling</h3>
                                 <p class="text-gray-600">Atur jadwal giling dengan detail kebutuhan tebu dan tanggal operasional pabrik.</p>
                             </div>
                         </div>
                         <div class="flex items-start">
-                            <div class="bg-green-600 w-8 h-8 rounded-full flex items-center justify-center mr-4 mt-1">
-                                <i class="fas fa-check-circle text-white text-sm"></i>
-                            </div>
                             <div>
                                 <h3 class="text-lg font-semibold text-gray-900 mb-2">Penerimaan Tebu</h3>
                                 <p class="text-gray-600">Terima atau tolak petani yang ingin setor tebu sesuai dengan kapasitas dan kebutuhan pabrik.</p>
                             </div>
                         </div>
                         <div class="flex items-start">
-                            <div class="bg-green-600 w-8 h-8 rounded-full flex items-center justify-center mr-4 mt-1">
-                                <i class="fas fa-history text-white text-sm"></i>
-                            </div>
                             <div>
                                 <h3 class="text-lg font-semibold text-gray-900 mb-2">Monitoring & Riwayat</h3>
                                 <p class="text-gray-600">Pantau jadwal panen petani dan lihat riwayat penerimaan tebu untuk evaluasi kinerja.</p>
@@ -189,7 +158,6 @@
         </div>
     </section>
 
-    <!-- CTA Section -->
     <section class="py-16 bg-green-600">
         <div class="max-w-4xl mx-auto text-center px-4 sm:px-6 lg:px-8">
             <h2 class="text-3xl md:text-4xl font-bold text-white mb-6">
@@ -199,11 +167,11 @@
                 Mulai digitalisasi distribusi tebu Anda dan tingkatkan efisiensi kerjasama antara petani dan pabrik gula.
             </p>
             <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                <a href="#" class="bg-white hover:bg-gray-100 text-green-600 px-8 py-3 rounded-lg font-semibold text-lg transition duration-300 shadow-lg">
+                <a href="{{ route('registerPetani') }}" class="bg-white hover:bg-gray-100 text-green-600 px-8 py-3 rounded-lg font-semibold text-lg transition duration-300 shadow-lg">
                     <i class="fas fa-seedling mr-2"></i>
                     Daftar sebagai Petani
                 </a>
-                <a href="#" class="bg-green-700 hover:bg-green-800 text-white px-8 py-3 rounded-lg font-semibold text-lg transition duration-300 shadow-lg">
+                <a href="{{ route('registerPabrik') }}" class="bg-green-700 hover:bg-green-800 text-white px-8 py-3 rounded-lg font-semibold text-lg transition duration-300 shadow-lg">
                     <i class="fas fa-industry mr-2"></i>
                     Daftar sebagai Pabrik
                 </a>

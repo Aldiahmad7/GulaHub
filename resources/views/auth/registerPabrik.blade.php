@@ -2,14 +2,28 @@
 
 @section('content')
     <div class="flex min-h-screen">
-        <div class="flex-1 flex items-center justify-center px-4 sm:px-6 lg:px-8">
+        <div class="flex-1 flex items-center justify-center px-4 sm:px-6 lg:px-8 py-8">
             <div class="max-w-md w-full space-y-8">
                 <div class="bg-white rounded-2xl shadow-xl p-8">
                     <div class="text-center mb-8">
-                        <h2 class="text-3xl font-bold text-gray-900">Login</h2>
+                        <h2 class="text-3xl font-bold text-gray-900">Daftar sebagai Pabrik</h2>
                     </div>
 
                     <form class="space-y-6" action="#" method="POST">
+                        <div>
+                            <label for="nama" class="block text-sm font-medium text-gray-700 mb-2">
+                                <i class="fas fa-building text-green-600 mr-2"></i>
+                                Nama Pabrik
+                            </label>
+                            <input
+                                id="nama"
+                                name="nama"
+                                type="text"
+                                required
+                                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500 transition duration-300 placeholder-gray-400"
+                                placeholder="Masukkan nama pabrik">
+                        </div>
+
                         <div>
                             <label for="email" class="block text-sm font-medium text-gray-700 mb-2">
                                 <i class="fas fa-envelope text-green-600 mr-2"></i>
@@ -22,7 +36,22 @@
                                 autocomplete="email"
                                 required
                                 class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500 transition duration-300 placeholder-gray-400"
-                                placeholder="Masukkan email Anda">
+                                placeholder="Masukkan email">
+                        </div>
+
+                        <div>
+                            <label for="alamat" class="block text-sm font-medium text-gray-700 mb-2">
+                                <i class="fas fa-map-marker-alt text-green-600 mr-2"></i>
+                                Alamat Lengkap
+                            </label>
+                            <textarea
+                                id="alamat"
+                                name="alamat"
+                                rows="3"
+                                required
+                                class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500 transition duration-300 placeholder-gray-400 resize-none"
+                                placeholder="Masukkan alamat lengkap"
+                            ></textarea>
                         </div>
 
                         <div>
@@ -35,14 +64,14 @@
                                     id="password"
                                     name="password"
                                     type="password"
-                                    autocomplete="current-password"
+                                    autocomplete="new-password"
                                     required
                                     class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500 transition duration-300 placeholder-gray-400 pr-12"
-                                    placeholder="Masukkan password Anda">
+                                    placeholder="Masukkan Password">
                                 <button
                                     type="button"
                                     class="absolute inset-y-0 right-0 pr-3 flex items-center"
-                                    onclick="togglePassword()">
+                                    onclick="togglePassword('password')">
                                     <i id="passwordIcon" class="fas fa-eye text-gray-400 hover:text-green-600 transition duration-300"></i>
                                 </button>
                             </div>
@@ -52,24 +81,24 @@
                             <button
                                 type="submit"
                                 class="w-full flex justify-center py-3 px-4 border border-transparent rounded-lg shadow-sm text-sm font-medium text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 transition duration-300">
-                                Masuk
+                                Daftar sebagai Pabrik
                             </button>
                         </div>
                     </form>
 
-                    <div class="mt-8 space-y-4">
-                        <p class="text-center text-gray-600 font-medium">Belum punya akun? Daftar sebagai:</p>
-
-                        <div class="flex flex-col sm:flex-row gap-3">
-                            <a href="{{ route('registerPetani') }}" class="flex-1 flex items-center justify-center px-4 py-3 border border-green-600 rounded-lg text-green-600 hover:bg-green-50 font-medium transition duration-300">
-                                <i class="fas fa-seedling mr-2"></i>
-                                Petani
+                    <div class="mt-8 text-center space-y-3">
+                        <p class="text-gray-600">
+                            Sudah punya akun?
+                            <a href="{{ route('login') }}" class="text-green-600 hover:text-green-700 font-medium transition duration-300">
+                                Login di sini
                             </a>
-                            <a href="{{ route('registerPabrik') }}" class="flex-1 flex items-center justify-center px-4 py-3 border border-green-600 rounded-lg text-green-600 hover:bg-green-50 font-medium transition duration-300">
-                                <i class="fas fa-industry mr-2"></i>
-                                Pabrik
+                        </p>
+                        <p class="text-gray-600">
+                            Atau
+                            <a href="{{ route('registerPetani') }}" class="text-green-600 hover:text-green-700 font-medium transition duration-300">
+                                Daftar sebagai Petani
                             </a>
-                        </div>
+                        </p>
                     </div>
                 </div>
             </div>
@@ -77,9 +106,9 @@
     </div>
 
     <script>
-        function togglePassword() {
-            const passwordInput = document.getElementById('password');
-            const passwordIcon = document.getElementById('passwordIcon');
+        function togglePassword(inputId) {
+            const passwordInput = document.getElementById(inputId);
+            const passwordIcon = document.getElementById(inputId + 'Icon');
 
             if (passwordInput.type === 'password') {
                 passwordInput.type = 'text';
@@ -92,7 +121,7 @@
             }
         }
 
-        // Form validation feedback
+        // Form validation
         document.getElementById('email').addEventListener('blur', function() {
             const email = this.value;
             const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -106,13 +135,14 @@
             }
         });
 
-        // Add loading state to submit button
+        // Form submission with loading state
         document.querySelector('form').addEventListener('submit', function(e) {
             e.preventDefault();
 
             const submitBtn = this.querySelector('button[type="submit"]');
             const originalContent = submitBtn.innerHTML;
 
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i>Mendaftarkan...';
             submitBtn.disabled = true;
 
             // Simulate loading (remove this in actual implementation)

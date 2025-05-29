@@ -15,9 +15,7 @@
     }
 </style>
 
-<body class="bg-gray-50 text-gray-800 font-sans scrollbar-hide">
-
-    @include('components.navbar')
+<body class="bg-gradient-to-br from-green-50 to-green-100 min-h-screen">
 
     <main>
         @yield('content')
