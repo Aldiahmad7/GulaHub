@@ -7,6 +7,11 @@ Route::get('/', function () {
     return view('landingpage');
 });
 
+Route::get('/admin/dashboard', function () {
+    return view('admin.dashboard');
+});
+
+
 Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
 Route::get('/registerPabrik', [AuthController::class, 'showRegisterPabrik'])->name('registerPabrik');
 Route::get('/registerPetani', [AuthController::class, 'showRegisterPetani'])->name('registerPetani');
