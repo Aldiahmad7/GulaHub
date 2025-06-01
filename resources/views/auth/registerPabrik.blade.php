@@ -9,15 +9,16 @@
                         <h2 class="text-3xl font-bold text-gray-900">Daftar sebagai Pabrik</h2>
                     </div>
 
-                    <form class="space-y-6" action="#" method="POST">
+                    <form class="space-y-6" action="{{ route('register.pabrik.post') }}" method="POST">
+                        @csrf
                         <div>
                             <label for="nama" class="block text-sm font-medium text-gray-700 mb-2">
                                 <i class="fas fa-building text-green-600 mr-2"></i>
                                 Nama Pabrik
                             </label>
                             <input
-                                id="nama"
-                                name="nama"
+                                id="name"
+                                name="name"
                                 type="text"
                                 required
                                 class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-green-500 transition duration-300 placeholder-gray-400"
@@ -139,16 +140,18 @@
         document.querySelector('form').addEventListener('submit', function(e) {
             e.preventDefault();
 
-            const submitBtn = this.querySelector('button[type="submit"]');
+            const form = this;
+            const submitBtn = form.querySelector('button[type="submit"]');
             const originalContent = submitBtn.innerHTML;
 
-            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i>Mendaftarkan...';
+            submitBtn.innerHTML = 'Mendaftarkan...';
             submitBtn.disabled = true;
 
-            // Simulate loading (remove this in actual implementation)
             setTimeout(() => {
                 submitBtn.innerHTML = originalContent;
                 submitBtn.disabled = false;
+
+                form.submit();
             }, 2000);
         });
     </script>

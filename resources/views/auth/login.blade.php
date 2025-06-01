@@ -9,7 +9,8 @@
                         <h2 class="text-3xl font-bold text-gray-900">Login</h2>
                     </div>
 
-                    <form class="space-y-6" action="#" method="POST">
+                    <form class="space-y-6" action="{{ route('login.post') }}" method="POST">
+                        @csrf
                         <div>
                             <label for="email" class="block text-sm font-medium text-gray-700 mb-2">
                                 <i class="fas fa-envelope text-green-600 mr-2"></i>
@@ -92,8 +93,8 @@
             }
         }
 
-        // Form validation feedback
-        document.getElementById('email').addEventListener('blur', function() {
+        // Validasi email saat blur
+        document.getElementById('email').addEventListener('blur', function () {
             const email = this.value;
             const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
@@ -106,20 +107,22 @@
             }
         });
 
-        // Add loading state to submit button
-        document.querySelector('form').addEventListener('submit', function(e) {
+        // Form submit dengan loading simulasi, lalu submit
+        document.querySelector('form').addEventListener('submit', function (e) {
             e.preventDefault();
 
-            const submitBtn = this.querySelector('button[type="submit"]');
+            const form = this;
+            const submitBtn = form.querySelector('button[type="submit"]');
             const originalContent = submitBtn.innerHTML;
 
             submitBtn.disabled = true;
+            submitBtn.innerHTML = 'Memproses...';
 
-            // Simulate loading (remove this in actual implementation)
             setTimeout(() => {
                 submitBtn.innerHTML = originalContent;
                 submitBtn.disabled = false;
-            }, 2000);
+                form.submit();
+            }, 1000);
         });
     </script>
 @endsection
