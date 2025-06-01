@@ -12,17 +12,41 @@ class AuthController extends Controller
 {
     public function showLoginForm()
     {
+        if (Auth::check()) {
+            return $this->redirectToDashboard();
+        }
+
         return view('auth.login');
     }
 
     public function showRegisterPabrik()
     {
+        if (Auth::check()) {
+            return $this->redirectToDashboard();
+        }
+
         return view('auth.registerPabrik');
     }
 
     public function showRegisterPetani()
     {
+        if (Auth::check()) {
+            return $this->redirectToDashboard();
+        }
+
         return view('auth.registerPetani');
+    }
+
+    private function redirectToDashboard()
+    {
+        $role = Auth::user()->role;
+
+        return match ($role) {
+            'admin' => redirect()->route('admin.dashboard'),
+            'pabrik' => redirect()->route('pabrik.dashboard'),
+            'petani' => redirect()->route('petani.dashboard'),
+            default => redirect('/'),
+        };
     }
 
     public function login(Request $request)
