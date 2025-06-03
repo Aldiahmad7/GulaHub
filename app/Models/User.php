@@ -47,4 +47,30 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    /**
+     * Relasi: 1 User memiliki banyak RencanaGiling.
+     */
+    public function rencanaGiling()
+    {
+        return $this->hasMany(RencanaGiling::class);
+    }
+    public function rencanaPanen()
+    {
+        return $this->hasMany(rencanaPanen::class);
+    }
+
+    public function pengajuanGiling()
+    {
+        return $this->belongsToMany(RencanaGiling::class, 'petani_rencana_giling', 'petani_id', 'rencana_giling_id')
+            ->withPivot('status', 'tanggal_diajukan')
+            ->withTimestamps();
+    }
+
+    public function pengajuanPanen()
+    {
+        return $this->belongsToMany(rencanaPanenen::class, 'pabrik_rencana_panen', 'pabrik_id', 'rencana_panen_id')
+            ->withPivot('status', 'tanggal_diajukan')
+            ->withTimestamps();
+    }
 }

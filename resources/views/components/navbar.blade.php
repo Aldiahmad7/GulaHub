@@ -10,7 +10,6 @@
             </div>
 
             <div class="flex items-center space-x-4">
-
                 {{-- USER BELUM LOGIN --}}
                 @guest
                     <a href="{{ route('login') }}"
@@ -22,24 +21,47 @@
                 @auth
                     <!-- Menu utama -->
                     <div class="hidden md:flex items-center space-x-6">
-                        <a href="#"
-                           class="relative text-green-700 font-semibold px-3 py-2 rounded-lg transition-all duration-300 after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-full after:h-0.5 after:bg-gradient-to-r after:from-green-600 after:to-emerald-600 after:rounded-full">
-                            Dashboard
-                        </a>
-
                         @if(Auth::user()->role === 'petani')
-                            <a href="#" class="text-gray-600 hover:text-green-700 font-medium px-3 py-2 rounded-lg hover:bg-green-50 transition-all duration-300">
+                            <a href="{{ route('petani.dashboard') }}"
+                               class="relative text-green-700 font-semibold px-3 py-2 rounded-lg transition-all duration-300 after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-full after:h-0.5 after:bg-gradient-to-r after:from-green-600 after:to-emerald-600 after:rounded-full">
+                                Dashboard
+                            </a>
+                            <a href="{{ route('petani.jadwalgiling') }}"
+                               class="text-gray-600 hover:text-green-700 font-medium px-3 py-2 rounded-lg hover:bg-green-50 transition-all duration-300">
                                 Jadwal Giling
                             </a>
-                            <a href="#" class="text-gray-600 hover:text-green-700 font-medium px-3 py-2 rounded-lg hover:bg-green-50 transition-all duration-300">
+                            <a href="{{ route('petani.rencanapanen') }}"
+                               class="text-gray-600 hover:text-green-700 font-medium px-3 py-2 rounded-lg hover:bg-green-50 transition-all duration-300">
                                 Rencana Panen
                             </a>
+                            <a href="{{ route('petani.permintaan') }}"
+                               class="text-gray-600 hover:text-green-700 font-medium px-3 py-2 rounded-lg hover:bg-green-50 transition-all duration-300">
+                                Permintaan
+                            </a>
+                            <a href="{{ route('petani.ajuan') }}"
+                               class="text-gray-600 hover:text-green-700 font-medium px-3 py-2 rounded-lg hover:bg-green-50 transition-all duration-300">
+                                Pengajuan
+                            </a>
                         @elseif(Auth::user()->role === 'pabrik')
-                            <a href="#" class="text-gray-600 hover:text-green-700 font-medium px-3 py-2 rounded-lg hover:bg-green-50 transition-all duration-300">
+                            <a href="{{ route('pabrik.dashboard') }}"
+                               class="relative text-green-700 font-semibold px-3 py-2 rounded-lg transition-all duration-300 after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-full after:h-0.5 after:bg-gradient-to-r after:from-green-600 after:to-emerald-600 after:rounded-full">
+                                Dashboard
+                            </a>
+                            <a href="{{ route('pabrik.jadwalpanen') }}"
+                               class="text-gray-600 hover:text-green-700 font-medium px-3 py-2 rounded-lg hover:bg-green-50 transition-all duration-300">
                                 Jadwal Panen
                             </a>
-                            <a href="#" class="text-gray-600 hover:text-green-700 font-medium px-3 py-2 rounded-lg hover:bg-green-50 transition-all duration-300">
+                            <a href="{{ route('pabrik.rencanagiling') }}"
+                               class="text-gray-600 hover:text-green-700 font-medium px-3 py-2 rounded-lg hover:bg-green-50 transition-all duration-300">
                                 Rencana Giling
+                            </a>
+                            <a href="{{ route('pabrik.permintaan') }}"
+                               class="text-gray-600 hover:text-green-700 font-medium px-3 py-2 rounded-lg hover:bg-green-50 transition-all duration-300">
+                                Permintaan
+                            </a>
+                            <a href="{{ route('pabrik.ajuan') }}"
+                               class="text-gray-600 hover:text-green-700 font-medium px-3 py-2 rounded-lg hover:bg-green-50 transition-all duration-300">
+                                Pengajuan
                             </a>
                         @endif
                     </div>
@@ -77,28 +99,36 @@
                             </div>
 
                             @if(Auth::user()->role === 'petani')
-                                <a href="#" class="flex items-center px-4 py-3 text-sm text-gray-700 hover:bg-green-50 hover:text-green-700 transition-colors duration-200">
+                                <a href="{{ route('petani.riwayatsetor') }}"
+                                   class="flex items-center px-4 py-3 text-sm text-gray-700 hover:bg-green-50 hover:text-green-700 transition-colors duration-200">
                                     <svg class="w-4 h-4 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                              d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
                                     </svg>
-                                    Riwayat Setor
+                                    Riwayat Permintaan
                                 </a>
-                                <a href="#" class="flex items-center px-4 py-3 text-sm text-gray-700 hover:bg-green-50 hover:text-green-700 transition-colors duration-200">
+                                <a href="{{ route('petani.profil') }}"
+                                   class="flex items-center px-4 py-3 text-sm text-gray-700 hover:bg-green-50 hover:text-green-700 transition-colors duration-200">
                                     <svg class="w-4 h-4 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                              d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
                                     </svg>
                                     Profil
                                 </a>
                             @elseif(Auth::user()->role === 'pabrik')
-                                <a href="#" class="flex items-center px-4 py-3 text-sm text-gray-700 hover:bg-green-50 hover:text-green-700 transition-colors duration-200">
+                                <a href="{{ route('pabrik.riwayatterima') }}"
+                                   class="flex items-center px-4 py-3 text-sm text-gray-700 hover:bg-green-50 hover:text-green-700 transition-colors duration-200">
                                     <svg class="w-4 h-4 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                              d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
                                     </svg>
-                                    Riwayat Penerimaan
+                                    Riwayat Permintaan
                                 </a>
-                                <a href="{{ route('pabrik.profil') }}" class="flex items-center px-4 py-3 text-sm text-gray-700 hover:bg-green-50 hover:text-green-700 transition-colors duration-200">
+                                <a href="{{ route('pabrik.profil') }}"
+                                   class="flex items-center px-4 py-3 text-sm text-gray-700 hover:bg-green-50 hover:text-green-700 transition-colors duration-200">
                                     <svg class="w-4 h-4 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                              d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
                                     </svg>
                                     Profil
                                 </a>
@@ -108,9 +138,11 @@
 
                             <form method="POST" action="{{ route('logout') }}">
                                 @csrf
-                                <button type="submit" class="flex items-center w-full text-left px-4 py-3 text-sm text-red-600 hover:bg-red-50 transition-colors duration-200">
+                                <button type="submit"
+                                        class="flex items-center w-full text-left px-4 py-3 text-sm text-red-600 hover:bg-red-50 transition-colors duration-200">
                                     <svg class="w-4 h-4 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/>
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                              d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/>
                                     </svg>
                                     Keluar
                                 </button>
