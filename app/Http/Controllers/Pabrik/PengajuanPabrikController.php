@@ -32,10 +32,11 @@ class PengajuanPabrikController extends Controller
                 'petani.name as nama_petani',
                 'rencana_panens.tanggal as tanggal_rencana',
                 'pabrik_rencana_panen.status',
+                'pabrik_rencana_panen.catatan_penolakan',
                 'pabrik_rencana_panen.tanggal_diajukan'
             )
             ->orderBy('rencana_panens.tanggal', 'desc')
-            ->get();
+            ->paginate(10);
 
         return view('pabrik.pengajuan', compact('ajuanSaya', 'tahunDipilih'));
     }

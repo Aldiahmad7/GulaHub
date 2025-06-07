@@ -86,6 +86,14 @@
                                         <span>Status</span>
                                     </div>
                                 </th>
+                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                    <div class="flex items-center  space-x-2">
+                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12H9m0 0l3-3m-3 3l3 3"></path>
+                                        </svg>
+                                        <span>Catatan</span>
+                                    </div>
+                                </th>
                             </tr>
                         </thead>
                         <tbody class="bg-white divide-y divide-gray-200">
@@ -143,10 +151,16 @@
                                             </span>
                                         @endif
                                     </td>
+                                     <td class="px-6 py-4 align-middle text-sm text-gray-700">
+                                        {{ $ajuan->catatan_penolakan ?? '-' }}
+                                    </td>
                                 </tr>
                             @endforeach
                         </tbody>
                     </table>
+                    <div class="px-6 py-4 border-t border-gray-200 bg-white">
+                        {{ $ajuanSaya->withQueryString()->links() }}
+                    </div>
                 </div>
             </div>
         @endif

@@ -9,7 +9,6 @@ use Illuminate\Support\Facades\DB;
 
 class PengajuanPetaniController extends Controller
 {
-
     public function ajuanPetani(Request $request)
     {
         $userId = Auth::id();
@@ -29,12 +28,12 @@ class PengajuanPetaniController extends Controller
                 'pabrik.name as nama_pabrik',
                 'rencana_gilings.tanggal as tanggal_rencana',
                 'petani_rencana_giling.status',
-                'petani_rencana_giling.tanggal_diajukan'
+                'petani_rencana_giling.catatan_penolakan',
+                'petani_rencana_giling.tanggal_diajukan',
             )
             ->orderBy('rencana_gilings.tanggal', 'desc')
-            ->get();
+            ->paginate(10);
 
         return view('petani.pengajuan', compact('ajuanSaya', 'tahunDipilih'));
     }
-
 }

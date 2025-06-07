@@ -23,7 +23,7 @@
                                 </svg>
                             </div>
                             <div>
-                                <h3 class="text-lg font-semibold text-gray-800">Rencana Tanam</h3>
+                                <h3 class="text-lg font-semibold text-gray-800">Rencana Panen</h3>
                                 <p class="text-sm text-gray-500">
                                     {{ \Carbon\Carbon::parse($rencana->tanggal)->translatedFormat('d F Y') }}
                                     <span class="ml-2 text-xs bg-gray-100 text-gray-600 px-2 py-0.5 rounded-full">
@@ -75,17 +75,29 @@
                                         </div>
                                     </div>
 
-                                    <form method="POST" action="{{ route('pabrik.konfirmasi', [$rencana->id, $petani->id]) }}" class="flex-shrink-0">
-                                        @csrf
-                                        <input type="hidden" name="status" value="Disetujui">
-                                        <button type="submit"
-                                            class="w-full sm:w-auto inline-flex items-center justify-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 transition-all duration-200">
+                                    <div class="flex gap-2">
+                                        <form method="POST" action="{{ route('pabrik.konfirmasi', [$rencana->id, $petani->id]) }}">
+                                            @csrf
+                                            <input type="hidden" name="status" value="Disetujui">
+                                            <button type="submit"
+                                                class="inline-flex items-center justify-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 transition-all duration-200">
+                                                <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                                </svg>
+                                                Setujui
+                                            </button>
+                                        </form>
+
+                                        <button type="button"
+                                            onclick="openTolakModal({{ $rencana->id }}, {{ $petani->id }})"
+                                            class="inline-flex items-center justify-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 transition-all duration-200">
                                             <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
                                             </svg>
-                                            Setujui
+                                            Tolak
                                         </button>
-                                    </form>
+                                    </div>
+
                                 </div>
                             </div>
                         @endforeach
@@ -108,7 +120,34 @@
     </div>
 </div>
 
+<!-- Modal Tolak -->
+<div id="tolakModal" class="fixed z-50 inset-0 overflow-y-auto hidden bg-black bg-opacity-40">
+    <div class="flex items-center justify-center min-h-screen">
+        <div class="bg-white p-6 rounded-lg shadow-lg w-full max-w-md">
+            <h3 class="text-lg font-semibold mb-4">Catatan Penolakan</h3>
+            <form id="formTolak" method="POST">
+                @csrf
+                <input type="hidden" name="status" value="Ditolak">
+                <textarea name="catatan_penolakan" rows="4" required class="w-full border border-gray-300 rounded-md p-2 mb-4" placeholder="Tulis alasan penolakan..."></textarea>
+                <div class="flex justify-end gap-2">
+                    <button type="button" onclick="closeTolakModal()" class="px-4 py-2 bg-gray-200 rounded-md">Batal</button>
+                    <button type="submit" class="px-4 py-2 bg-red-600 text-white rounded-md hover:bg-red-700">Tolak</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
 <script>
+function openTolakModal(rencanaId, petaniId) {
+    const form = document.getElementById('formTolak');
+    form.action = `/pabrik/konfirmasi/${rencanaId}/${petaniId}`;
+    document.getElementById('tolakModal').classList.remove('hidden');
+}
+
+function closeTolakModal() {
+    document.getElementById('tolakModal').classList.add('hidden');
+}
 document.addEventListener('DOMContentLoaded', function() {
     setTimeout(() => {
         document.querySelectorAll('.animate-fadeIn').forEach(el => {

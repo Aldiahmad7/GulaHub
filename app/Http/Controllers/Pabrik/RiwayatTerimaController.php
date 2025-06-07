@@ -30,7 +30,8 @@ class RiwayatTerimaController extends Controller
                 return $query->whereYear('rencana_gilings.tanggal', $tahun);
             })
             ->orderBy('rencana_gilings.tanggal', 'desc')
-            ->get();
+            ->paginate(10);
+
 
         return view('pabrik.riwayatterima', compact('riwayat', 'tahun'));
     }

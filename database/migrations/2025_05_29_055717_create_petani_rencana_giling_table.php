@@ -16,6 +16,7 @@ return new class extends Migration
             $table->foreignId('petani_id')->constrained('users')->onDelete('cascade');
             $table->foreignId('rencana_giling_id')->constrained()->onDelete('cascade');
             $table->string('status')->default('Menunggu Persetujuan');
+            $table->text('catatan_penolakan')->nullable();
             $table->date('tanggal_diajukan')->nullable();
             $table->timestamps();
         });

@@ -30,23 +30,26 @@ class PermintaanSetorController extends Controller
     public function konfirmasiSetor(Request $request, $rencanaPanenId, $pabrikId)
     {
         $status = $request->input('status'); // "Disetujui" atau "Ditolak"
+        $catatan = $request->input('catatan_penolakan'); // Catatan dari petani
 
         DB::beginTransaction();
         try {
-            // Update status di pivot untuk petani yg dikonfirmasi
+            $updateData = ['status' => $status];
+            if ($status === 'Ditolak' && $catatan) {
+                $updateData['catatan_penolakan'] = $catatan;
+            }
+
             DB::table('pabrik_rencana_panen')
                 ->where('rencana_panen_id', $rencanaPanenId)
                 ->where('pabrik_id', $pabrikId)
-                ->update(['status' => $status]);
+                ->update($updateData);
 
             if ($status === 'Disetujui') {
-                // Tolak semua pengajuan lain di pivot yang berkaitan dengan rencana ini
                 DB::table('pabrik_rencana_panen')
                     ->where('rencana_panen_id', $rencanaPanenId)
                     ->where('pabrik_id', '!=', $pabrikId)
                     ->update(['status' => 'Ditolak']);
 
-                // Ubah status di rencana giling menjadi "Disetujui"
                 RencanaPanen::where('id', $rencanaPanenId)
                     ->update(['status' => 'Disetujui']);
             }
@@ -58,5 +61,6 @@ class PermintaanSetorController extends Controller
             return back()->with('error', 'Terjadi kesalahan: ' . $e->getMessage());
         }
     }
+
 
 }

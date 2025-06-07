@@ -30,7 +30,8 @@ class RiwayatSetorController extends Controller
                 return $query->whereYear('rencana_panens.tanggal', $tahun);
             })
             ->orderBy('rencana_panens.tanggal', 'desc')
-            ->get();
+            ->paginate(10);
+
 
         return view('petani.riwayatsetor', compact('riwayat', 'tahun'));
     }

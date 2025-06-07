@@ -34,29 +34,34 @@ class PermintaanTerimaController extends Controller
     public function konfirmasiAjuan(Request $request, $rencanaGilingId, $petaniId)
     {
         $status = $request->input('status'); // "Disetujui" atau "Ditolak"
-
+        $catatan = $request->input('catatan_penolakan');
         DB::beginTransaction();
         try {
-            // Update status di pivot untuk petani yg dikonfirmasi
+            $updateData = ['status' => $status];
+            if ($status === 'Ditolak'&& $catatan) {
+                $updateData['catatan_penolakan'] = $catatan;
+            }
+
+            // Update status dan catatan penolakan (jika ada) untuk petani yang dikonfirmasi
             DB::table('petani_rencana_giling')
                 ->where('rencana_giling_id', $rencanaGilingId)
                 ->where('petani_id', $petaniId)
-                ->update(['status' => $status]);
+                ->update($updateData);
 
             if ($status === 'Disetujui') {
-                // Tolak semua pengajuan lain di pivot yang berkaitan dengan rencana ini
+                // Tolak semua pengajuan lain yang belum disetujui
                 DB::table('petani_rencana_giling')
                     ->where('rencana_giling_id', $rencanaGilingId)
                     ->where('petani_id', '!=', $petaniId)
-                    ->update(['status' => 'Ditolak']);
+                    ->update(['status' => 'Ditolak', ]);
 
-                // Ubah status di rencana giling menjadi "Disetujui"
+                // Set status utama di rencana_giling
                 RencanaGiling::where('id', $rencanaGilingId)
                     ->update(['status' => 'Disetujui']);
             }
 
             DB::commit();
-            return back()->with('success', 'Status berhasil diperbarui');
+            return back()->with('success', 'Status berhasil diperbarui.');
         } catch (\Exception $e) {
             DB::rollBack();
             return back()->with('error', 'Terjadi kesalahan: ' . $e->getMessage());
