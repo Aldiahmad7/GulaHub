@@ -20,8 +20,10 @@ class UserSeeder extends Seeder
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
+
+            // PABRIK
             [
-                'name' => 'Pabrik GulaLee',
+                'name' => 'GulaLee',
                 'email' => 'gulalee@gmail.com',
                 'password' => Hash::make('pabrik'),
                 'alamat' => 'Jalan jalan kepasar malam, cakep',
@@ -30,10 +32,48 @@ class UserSeeder extends Seeder
                 'updated_at' => now(),
             ],
             [
-                'name' => 'Petanigga',
-                'email' => 'petanigga@gmail.com',
+                'name' => 'Perkasa',
+                'email' => 'perkasa@gmail.com',
+                'password' => Hash::make('pabrik'),
+                'alamat' => 'Sumbersari',
+                'role' => 'pabrik',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'name' => 'Rajawali',
+                'email' => 'rajawali@gmail.com',
+                'password' => Hash::make('pabrik'),
+                'alamat' => 'Ambulu',
+                'role' => 'pabrik',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+
+            // PETANI
+            [
+                'name' => 'Rahmad',
+                'email' => 'rahmad@gmail.com',
                 'password' => Hash::make('petani'),
-                'alamat' => 'Desa Penari',
+                'alamat' => 'Wuluhan',
+                'role' => 'petani',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'name' => 'Liong',
+                'email' => 'liong@gmail.com',
+                'password' => Hash::make('petani'),
+                'alamat' => 'Bali',
+                'role' => 'petani',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+            [
+                'name' => 'Agus',
+                'email' => 'agus@gmail.com',
+                'password' => Hash::make('petani'),
+                'alamat' => 'Jember',
                 'role' => 'petani',
                 'created_at' => now(),
                 'updated_at' => now(),

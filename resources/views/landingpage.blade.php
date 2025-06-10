@@ -4,7 +4,7 @@
     <section class="pt-20 pb-16 bg-gradient-to-br from-green-50 to-green-100">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center">
-                <h1 class="text-4xl md:text-6xl font-bold text-green-800 mb-6">
+                <h1 class="text-4xl md:text-6xl font-bold text-green-600 mb-6">
                     GulaHub
                 </h1>
                 <p class="text-xl md:text-2xl text-green-700 mb-8 max-w-3xl mx-auto">
@@ -68,7 +68,7 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid lg:grid-cols-2 gap-12 items-center">
                 <div>
-                    <h2 class="text-3xl md:text-4xl font-bold text-green-800 mb-6">
+                    <h2 class="text-3xl md:text-4xl font-bold text-green-600 mb-6">
                         Fitur untuk Petani
                     </h2>
                     <div class="space-y-6">
@@ -130,7 +130,7 @@
                     </div>
                 </div>
                 <div>
-                    <h2 class="text-3xl md:text-4xl font-bold text-green-800 mb-6">
+                    <h2 class="text-3xl md:text-4xl font-bold text-green-600 mb-6">
                         Fitur untuk Pabrik
                     </h2>
                     <div class="space-y-6">
