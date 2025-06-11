@@ -1,64 +1,134 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container mx-auto px-4 pt-16 max-w-6xl">
-    <h3 class="text-3xl font-semibold mb-8 mt-6 text-center text-gray-800">Riwayat Permintaan Petani</h3>
+<div class="min-h-screen bg-gray-50 py-8">
+    <div class="max-w-7xl mx-auto mt-12 px-4 sm:px-6 lg:px-8">
+        <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6 mb-8">
+            <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+                <div class="flex items-center gap-4">
+                    <div>
+                        <h1 class="text-2xl font-bold text-gray-900">Riwayat Permintaan Petani</h1>
+                        <p class="text-gray-600 mt-1">Daftar permintaan panen yang diajukan oleh petani</p>
+                    </div>
+                </div>
 
-    <!-- Filter Tahun -->
-    <form method="GET" action="{{ route('pabrik.riwayatterima') }}" class="mb-6 flex mt-6 items-center space-x-4">
-        <select name="tahun" id="tahun" onchange="this.form.submit()"
-            class="border rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500">
-            <option value="">Semua Tahun</option>
-            @foreach (range(date('Y'), 2024) as $year)
-                <option value="{{ $year }}" {{ request('tahun') == $year ? 'selected' : '' }}>
-                    {{ $year }}
-                </option>
-            @endforeach
-        </select>
-    </form>
+                <form method="GET" action="{{ route('pabrik.riwayatterima') }}" class="flex items-center gap-2 bg-gray-50 p-2 rounded-lg">
+                    <label class="text-sm font-medium text-gray-700">Tahun:</label>
+                    <select name="tahun" onchange="this.form.submit()"
+                            class="border border-gray-200 rounded-lg px-3 py-1.5 text-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors bg-white">
+                        <option value="">Semua Tahun</option>
+                        @foreach (range(date('Y'), 2024) as $year)
+                            <option value="{{ $year }}" {{ request('tahun') == $year ? 'selected' : '' }}>
+                                {{ $year }}
+                            </option>
+                        @endforeach
+                    </select>
+                </form>
+            </div>
+        </div>
 
-    <!-- Tabel Riwayat -->
-    <div class="overflow-x-auto shadow-lg rounded-lg">
-        <table class="min-w-full bg-white border border-gray-200">
-            <thead class="bg-gray-100">
-                <tr>
-                    <th class="py-3 px-6 text-left text-gray-700 font-medium border-b border-gray-300">Nama Petani</th>
-                    <th class="py-3 px-6 text-left text-gray-700 font-medium border-b border-gray-300">Tanggal Rencana</th>
-                    <th class="py-3 px-6 text-center text-gray-700 font-medium border-b border-gray-300">Status</th>
-                    <th class="py-3 px-6 text-left text-gray-700 font-medium border-b border-gray-300">Tanggal Diajukan</th>
-                </tr>
-            </thead>
-            <tbody>
-                @forelse ($riwayat as $item)
-                    <tr class="hover:bg-gray-50">
-                        <td class="py-4 px-6 border-b border-gray-200">{{ $item->nama_petani }}</td>
-                        <td class="py-4 px-6 border-b border-gray-200">
-                            {{ \Carbon\Carbon::parse($item->tanggal_rencana)->translatedFormat('d F Y') }}
-                        </td>
-                        <td class="py-4 px-6 border-b border-gray-200 text-center">
-                            @if($item->status === 'Disetujui')
-                                <span class="inline-block px-3 py-1 text-sm font-semibold text-green-800 bg-green-200 rounded-full">
-                                    {{ $item->status }}
-                                </span>
-                            @else
-                                <span class="inline-block px-3 py-1 text-sm font-semibold text-red-800 bg-red-200 rounded-full">
-                                    {{ $item->status }}
-                                </span>
-                            @endif
-                        </td>
-                        <td class="py-4 px-6 border-b border-gray-200">
-                            {{ \Carbon\Carbon::parse($item->tanggal_diajukan)->translatedFormat('d F Y') }}
-                        </td>
-                    </tr>
-                @empty
-                    <tr>
-                        <td colspan="4" class="py-6 text-center text-gray-500 italic">Tidak ada riwayat ditemukan.</td>
-                    </tr>
-                @endforelse
-            </tbody>
-        </table>
-        <div class="px-6 py-4 border-t border-gray-200 bg-white">
-            {{ $riwayat->withQueryString()->links() }}
+        <div class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
+            <div class="px-6 py-4 border-b border-gray-200 bg-gray-50">
+                <h2 class="text-lg font-semibold text-gray-900">Daftar Riwayat</h2>
+            </div>
+
+            @if($riwayat->count() > 0)
+                <div class="overflow-x-auto">
+                    <table class="min-w-full divide-y divide-gray-200">
+                        <thead class="bg-gray-50">
+                            <tr>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Nama Petani</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Tanggal Rencana</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
+                                <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Tanggal Diajukan</th>
+                            </tr>
+                        </thead>
+                        <tbody class="bg-white divide-y divide-gray-200">
+                            @foreach($riwayat as $item)
+                            <tr class="hover:bg-gray-50 transition-colors">
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    <div class="flex items-center gap-2">
+                                        <div class="bg-blue-50 p-2 rounded-lg">
+                                            <svg class="w-4 h-4 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
+                                            </svg>
+                                        </div>
+                                        <div>
+                                            <div class="text-sm font-medium text-gray-900">
+                                                {{ $item->nama_petani }}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    <div class="flex items-center gap-2">
+                                        <div class="bg-blue-50 p-2 rounded-lg">
+                                            <svg class="w-4 h-4 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                                            </svg>
+                                        </div>
+                                        <div>
+                                            <div class="text-sm font-medium text-gray-900">
+                                                {{ \Carbon\Carbon::parse($item->tanggal_rencana)->format('d M Y') }}
+                                            </div>
+                                            <div class="text-xs text-gray-500">
+                                                {{ \Carbon\Carbon::parse($item->tanggal_rencana)->format('l') }}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    @php
+                                        $statusColors = [
+                                            'Disetujui' => 'bg-green-100 text-green-800',
+                                            'Ditolak' => 'bg-red-100 text-red-800',
+                                            'Menunggu' => 'bg-yellow-100 text-yellow-800',
+                                            'Diproses' => 'bg-blue-100 text-blue-800'
+                                        ];
+                                        $colorClass = $statusColors[$item->status] ?? 'bg-gray-100 text-gray-800';
+                                    @endphp
+                                    <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium {{ $colorClass }}">
+                                        {{ $item->status }}
+                                    </span>
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    <div class="flex items-center gap-2">
+                                        <div class="bg-blue-50 p-2 rounded-lg">
+                                            <svg class="w-4 h-4 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
+                                            </svg>
+                                        </div>
+                                        <div>
+                                            <div class="text-sm font-medium text-gray-900">
+                                                {{ \Carbon\Carbon::parse($item->tanggal_diajukan)->format('d M Y') }}
+                                            </div>
+                                            <div class="text-xs text-gray-500">
+                                                {{ \Carbon\Carbon::parse($item->tanggal_diajukan)->format('l') }}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Pagination -->
+                <div class="px-6 py-4 border-t border-gray-200 bg-gray-50">
+                    {{ $riwayat->withQueryString()->links() }}
+                </div>
+            @else
+                <div class="px-6 py-12 text-center">
+                    <div class="mx-auto w-20 h-20 bg-gray-100 rounded-full flex items-center justify-center mb-4">
+                        <svg class="w-10 h-10 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-lg font-medium text-gray-900">Belum ada riwayat permintaan</h3>
+                    <p class="mt-1 text-sm text-gray-500">Tidak ditemukan riwayat permintaan panen dari petani</p>
+                </div>
+            @endif
         </div>
     </div>
 </div>

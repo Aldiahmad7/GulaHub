@@ -6,11 +6,6 @@
         <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6 mb-8">
             <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
                 <div class="flex items-center gap-4">
-                    <div class="bg-gradient-to-r from-blue-500 to-blue-600 p-3 rounded-lg">
-                        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
-                        </svg>
-                    </div>
                     <div>
                         <h1 class="text-2xl font-bold text-gray-900">Rencana Giling</h1>
                         <p class="text-gray-600 mt-1">Kelola jadwal dan rencana giling untuk tahun {{ $tahunDipilih }}</p>
@@ -136,12 +131,10 @@
                             <!-- Modal Edit -->
                             <div id="modalEdit{{ $item->id }}" class="fixed inset-0 z-50 hidden overflow-y-auto">
                                 <div class="flex items-center justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
-                                    <!-- Background overlay -->
                                     <div class="fixed inset-0 transition-opacity" aria-hidden="true">
                                         <div class="absolute inset-0 bg-gray-500 opacity-75"></div>
                                     </div>
 
-                                    <!-- Modal panel -->
                                     <div class="inline-block align-bottom bg-white rounded-lg text-left overflow-hidden shadow-xl transform transition-all sm:my-8 sm:align-middle sm:max-w-lg sm:w-full">
                                         <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
                                             <div class="sm:flex sm:items-start">

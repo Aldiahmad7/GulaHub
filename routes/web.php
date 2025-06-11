@@ -59,7 +59,7 @@ Route::middleware(['auth', RoleMiddleware::class . ':admin'])->group(function ()
 });
 
 // =======================
-// PABRIK ROUTES (Lengkap dari V1)
+// PABRIK ROUTES
 // =======================
 Route::middleware(['auth', RoleMiddleware::class . ':pabrik'])->prefix('pabrik')->name('pabrik.')->group(function () {
     Route::get('/dashboard', function () {
@@ -87,14 +87,15 @@ Route::middleware(['auth', RoleMiddleware::class . ':pabrik'])->prefix('pabrik')
 });
 
 // =======================
-// PETANI ROUTES (Lengkap dari V1)
+// PETANI ROUTES
 // =======================
 Route::middleware(['auth', RoleMiddleware::class . ':petani'])->prefix('petani')->name('petani.')->group(function () {
     Route::get('/dashboard', function () {
         return view('petani.dashboard');
     })->name('dashboard');
 
-    Route::get('/profil', [PageController::class, 'profilPetani'])->name('profil');
+    Route::get('/profil', [ProfilController::class, 'edit'])->name('profil');
+    Route::post('/profil/update', [ProfilController::class, 'update'])->name('profil.update');
 
     Route::get('/jadwalgiling', [JadwalGilingController::class, 'jadwalGiling'])->name('jadwalgiling');
     Route::get('/rencanagiling/{id}', [JadwalGilingController::class, 'rencanaGilingByPetani'])->name('rencanagiling');

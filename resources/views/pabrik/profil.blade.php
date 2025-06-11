@@ -4,9 +4,8 @@
 <div class="min-h-screen bg-gradient-to-br from-green-50 via-white to-emerald-50 py-8">
     <div class="max-w-2xl mx-auto px-4">
 
-        <!-- Alert Success -->
         @if(session('success'))
-            <div class="mb-6 bg-gradient-to-r from-green-50 to-emerald-50 border-l-4 border-green-500 p-4 rounded-lg shadow-sm">
+            <div class="mt-12 bg-gradient-to-r from-green-50 to-emerald-50 border-l-4 border-green-500 p-4 rounded-lg shadow-sm">
                 <div class="flex items-center">
                     <svg class="w-5 h-5 text-green-500 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
@@ -16,15 +15,13 @@
             </div>
         @endif
 
-        <!-- Main Profile Card -->
         <div class="bg-white rounded-3xl mt-30 shadow-xl border border-gray-100 overflow-hidden">
-            <!-- Card Header -->
             <div class="bg-gradient-to-r from-green-600 to-emerald-600 px-8 py-6">
                 <div class="flex justify-between items-center">
                     <div class="flex items-center space-x-4">
                         <div class="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center">
                             <span class="text-2xl font-bold text-white">
-                                {{ strtoupper(substr($user->name, 0, 2)) }}
+                                {{ strtoupper(substr($user->name, 0, 1)) }}
                             </span>
                         </div>
                         <div>
@@ -41,9 +38,7 @@
                 </div>
             </div>
 
-            <!-- Card Body -->
             <div class="p-8">
-                <!-- View Mode -->
                 <div id="viewMode" class="space-y-6">
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div class="bg-gray-50 rounded-2xl p-6">
@@ -99,7 +94,7 @@
                     </div>
                 </div>
 
-                <!-- Edit Mode -->
+                <!-- Edit -->
                 <div id="editMode" class="hidden">
                     <form action="{{ route('pabrik.profil.update') }}" method="POST" class="space-y-6">
                         @csrf
@@ -163,7 +158,7 @@
                                 Batal
                             </button>
                             <button type="submit"
-                                class="bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 text-white px-8 py-3 rounded-xl font-medium transition-all duration-300 transform hover:scale-105 hover:shadow-lg">
+                                class="bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 text-white px-8 py-3 rounded-xl font-medium transition-all duration-300 transform hover:shadow-lg">
                                 Simpan Perubahan
                             </button>
                         </div>
