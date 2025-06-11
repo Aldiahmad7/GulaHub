@@ -3,19 +3,20 @@
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Middleware\RoleMiddleware;
-use App\Http\Controllers\Auth\AuthController;
-use App\Http\Controllers\Pabrik\ProfilController;
 use App\Http\Controllers\PageController;
-use App\Http\Controllers\Pabrik\RencanaGilingController;
+use App\Http\Controllers\Auth\AuthController;
+use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Pabrik\ProfilController;
 use App\Http\Controllers\Pabrik\JadwalPanenController;
-use App\Http\Controllers\Pabrik\PermintaanTerimaController;
+use App\Http\Controllers\Petani\JadwalGilingController;
+use App\Http\Controllers\Petani\RencanaPanenController;
+use App\Http\Controllers\Petani\RiwayatSetorController;
+use App\Http\Controllers\Pabrik\RencanaGilingController;
 use App\Http\Controllers\Pabrik\RiwayatTerimaController;
 use App\Http\Controllers\Pabrik\PengajuanPabrikController;
-use App\Http\Controllers\Petani\RencanaPanenController;
-use App\Http\Controllers\Petani\JadwalGilingController;
-use App\Http\Controllers\Petani\PermintaanSetorController;
-use App\Http\Controllers\Petani\RiwayatSetorController;
 use App\Http\Controllers\Petani\PengajuanPetaniController;
+use App\Http\Controllers\Petani\PermintaanSetorController;
+use App\Http\Controllers\Pabrik\PermintaanTerimaController;
 
 // =======================
 // LANDING PAGE DAN AUTH
@@ -53,9 +54,9 @@ Route::post('/registerPetani', [AuthController::class, 'registerPetani'])->name(
 // ADMIN
 // =======================
 Route::middleware(['auth', RoleMiddleware::class . ':admin'])->group(function () {
-    Route::get('/admin/dashboard', function () {
-        return view('admin.dashboard');
-    })->name('admin.dashboard');
+    Route::get('/admin/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
+    Route::get('/admin/pengguna', [AdminController::class, 'pengguna'])->name('admin.pengguna');
+    Route::get('/admin/laporan', [AdminController::class, 'laporan'])->name('admin.laporan');
 });
 
 // =======================

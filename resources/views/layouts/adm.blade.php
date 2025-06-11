@@ -20,7 +20,7 @@
 
 <body class="bg-gray-50 text-gray-800 font-sans scrollbar-hide">
 
-    @include('components.navbar')
+    @include('components.sidebar')
 
     <main>
         @yield('content')
