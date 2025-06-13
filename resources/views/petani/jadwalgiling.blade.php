@@ -3,7 +3,6 @@
 @section('content')
 <div class="min-h-screen bg-gray-50 pt-20 pb-8">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <!-- Search Section - Consistent with Petani View -->
         <div class="mb-8 bg-white rounded-xl shadow-sm p-4">
             <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
                 <div class="md:w-1/3">
@@ -22,7 +21,6 @@
             </div>
         </div>
 
-        <!-- Pabrik Grid - Matching Petani Card Style -->
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5" id="pabrikGrid">
             @foreach($pabriks as $pabrik)
             <a href="{{ route('petani.rencanagiling', $pabrik->id) }}"
@@ -30,7 +28,6 @@
                style="animation-delay: {{ $loop->index * 0.1 }}s">
                 <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-5 h-full hover:shadow-md transition-all duration-300">
 
-                    <!-- Avatar Section - Similar to Petani Card -->
                     <div class="flex items-center mb-3">
                         <div class="w-12 h-12 bg-green-100 rounded-xl flex items-center justify-center mr-3 text-green-600 transition-all duration-300 group-hover:bg-green-200">
                             <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -63,7 +60,6 @@
                         $totalSchedules = $gilingSchedules->flatten()->count();
                     @endphp
 
-                    <!-- Status Badge - Same Style as Petani -->
                     <div class="mb-3">
                         @if($totalSchedules > 0)
                             <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800 transition-all duration-300 group-hover:bg-green-200">
@@ -76,7 +72,6 @@
                         @endif
                     </div>
 
-                    <!-- Schedule Info - Matching Petani Layout -->
                     <div class="mb-3">
                         @if($totalSchedules > 0)
                             <div class="bg-gray-50 p-2 rounded-lg transition-all duration-300 group-hover:bg-gray-100">
@@ -99,7 +94,6 @@
                         @endif
                     </div>
 
-                    <!-- Action Indicator - Same as Petani -->
                     <div class="pt-3 border-t border-gray-100 text-center">
                         <span class="inline-flex items-center text-sm text-green-600 font-medium transition-all duration-300 group-hover:text-green-700">
                             Lihat jadwal
@@ -110,7 +104,6 @@
             @endforeach
         </div>
 
-        <!-- Empty State - Consistent with Petani View -->
         @if($pabriks->isEmpty())
         <div class="text-center py-12 opacity-0 animate-fadeIn">
             <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-8 max-w-md mx-auto transition-all duration-300 hover:shadow-md">
@@ -127,7 +120,6 @@
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {
-    // Search functionality - Same implementation as Petani
     const searchInput = document.getElementById('searchPabrik');
     const pabrikCards = document.querySelectorAll('#pabrikGrid > a');
 
@@ -152,7 +144,6 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
 
-        // Handle empty state
         const emptyState = document.querySelector('.text-center.py-12');
         if (emptyState) {
             if (visibleCount === 0 && searchTerm !== '') {
@@ -166,7 +157,6 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
-    // Initialize animations
     setTimeout(() => {
         document.querySelectorAll('.animate-fadeIn').forEach(el => {
             el.style.opacity = '1';
@@ -176,7 +166,6 @@ document.addEventListener('DOMContentLoaded', function() {
 </script>
 
 <style>
-/* Same animation styles as Petani view */
 @keyframes fadeIn {
     from { opacity: 0; transform: translateY(10px); }
     to { opacity: 1; transform: translateY(0); }
@@ -191,7 +180,6 @@ document.addEventListener('DOMContentLoaded', function() {
     animation: fadeIn 0.5s ease forwards;
 }
 
-/* Consistent transitions */
 .transition-all {
     transition-property: all;
 }

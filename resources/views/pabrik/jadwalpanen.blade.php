@@ -3,7 +3,6 @@
 @section('content')
 <div class="min-h-screen bg-gray-50 pt-20 pb-8">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <!-- Improved Search Section with Title -->
         <div class="mb-8 bg-white rounded-xl shadow-sm p-4 transition-all duration-300 hover:shadow-md">
             <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
                 <div class="md:w-1/3">
@@ -22,7 +21,6 @@
             </div>
         </div>
 
-        <!-- Petani Grid with Enhanced Animations -->
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5" id="petaniGrid">
             @foreach($petanis as $petani)
             <a href="{{ route('pabrik.rencanapanen', $petani->id) }}"
@@ -63,7 +61,6 @@
                         $totalSchedules = $harvestSchedules->flatten()->count();
                     @endphp
 
-                    <!-- Status Badge -->
                     <div class="mb-3">
                         @if($totalSchedules > 0)
                             <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800 transition-all duration-300 group-hover:bg-green-200">
@@ -76,7 +73,6 @@
                         @endif
                     </div>
 
-                    <!-- Harvest Schedule Info -->
                     <div class="mb-3">
                         @if($totalSchedules > 0)
                             <div class="bg-gray-50 p-2 rounded-lg transition-all duration-300 group-hover:bg-gray-100">
@@ -99,7 +95,6 @@
                         @endif
                     </div>
 
-                    <!-- Action Indicator -->
                     <div class="pt-3 border-t border-gray-100 text-center">
                         <span class="inline-flex items-center text-sm text-green-600 font-medium transition-all duration-300 group-hover:text-green-700">
                             Lihat detail
@@ -110,7 +105,6 @@
             @endforeach
         </div>
 
-        <!-- Empty State -->
         @if($petanis->isEmpty())
         <div class="text-center py-12 opacity-0 animate-fadeIn">
             <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-8 max-w-md mx-auto transition-all duration-300 hover:shadow-md">
@@ -127,7 +121,6 @@
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {
-    // Enhanced Search functionality
     const searchInput = document.getElementById('searchPetani');
     const petaniCards = document.querySelectorAll('#petaniGrid > a');
 
@@ -152,7 +145,6 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
 
-        // Handle empty state
         const emptyState = document.querySelector('.text-center.py-12');
         if (emptyState) {
             if (visibleCount === 0 && searchTerm !== '') {
@@ -166,7 +158,6 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
-    // Initialize animations
     setTimeout(() => {
         document.querySelectorAll('.animate-fadeIn').forEach(el => {
             el.style.opacity = '1';

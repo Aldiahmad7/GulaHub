@@ -3,7 +3,6 @@
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Middleware\RoleMiddleware;
-use App\Http\Controllers\PageController;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Pabrik\ProfilController;
@@ -18,9 +17,7 @@ use App\Http\Controllers\Petani\PengajuanPetaniController;
 use App\Http\Controllers\Petani\PermintaanSetorController;
 use App\Http\Controllers\Pabrik\PermintaanTerimaController;
 
-// =======================
 // LANDING PAGE DAN AUTH
-// =======================
 Route::get('/', function () {
     if (Auth::check()) {
         $role = Auth::user()->role;
@@ -50,18 +47,16 @@ Route::post('/registerPabrik', [AuthController::class, 'registerPabrik'])->name(
 Route::get('/registerPetani', [AuthController::class, 'showRegisterPetani'])->name('registerPetani');
 Route::post('/registerPetani', [AuthController::class, 'registerPetani'])->name('register.petani.post');
 
-// =======================
 // ADMIN
-// =======================
 Route::middleware(['auth', RoleMiddleware::class . ':admin'])->group(function () {
     Route::get('/admin/dashboard', [AdminController::class, 'dashboard'])->name('admin.dashboard');
     Route::get('/admin/pengguna', [AdminController::class, 'pengguna'])->name('admin.pengguna');
     Route::get('/admin/laporan', [AdminController::class, 'laporan'])->name('admin.laporan');
+    Route::put('/admin/pengguna/{id}', [AdminController::class, 'updatePengguna']);
+    Route::delete('/admin/pengguna/{id}', [AdminController::class, 'hapusPengguna']);
 });
 
-// =======================
 // PABRIK ROUTES
-// =======================
 Route::middleware(['auth', RoleMiddleware::class . ':pabrik'])->prefix('pabrik')->name('pabrik.')->group(function () {
     Route::get('/dashboard', function () {
         return view('pabrik.dashboard');
@@ -87,9 +82,7 @@ Route::middleware(['auth', RoleMiddleware::class . ':pabrik'])->prefix('pabrik')
     Route::get('/pabrik/ajuan-saya', [PengajuanPabrikController::class, 'ajuanPabrik'])->name('ajuan');
 });
 
-// =======================
 // PETANI ROUTES
-// =======================
 Route::middleware(['auth', RoleMiddleware::class . ':petani'])->prefix('petani')->name('petani.')->group(function () {
     Route::get('/dashboard', function () {
         return view('petani.dashboard');
