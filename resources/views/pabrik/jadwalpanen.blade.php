@@ -28,7 +28,6 @@
                style="animation-delay: {{ $loop->index * 0.1 }}s">
                 <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-5 h-full hover:shadow-md transition-all duration-300">
 
-                    <!-- Avatar Section -->
                     <div class="flex items-center mb-3">
                         <div class="w-12 h-12 bg-green-100 rounded-xl flex items-center justify-center mr-3 text-green-600 transition-all duration-300 group-hover:bg-green-200">
                             <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">

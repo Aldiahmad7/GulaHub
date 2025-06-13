@@ -69,7 +69,7 @@ class User extends Authenticatable
 
     public function pengajuanPanen()
     {
-        return $this->belongsToMany(rencanaPanenen::class, 'pabrik_rencana_panen', 'pabrik_id', 'rencana_panen_id')
+        return $this->belongsToMany(rencanaPanen::class, 'pabrik_rencana_panen', 'pabrik_id', 'rencana_panen_id')
             ->withPivot('status', 'tanggal_diajukan')
             ->withTimestamps();
     }
