@@ -3,8 +3,11 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Models\User;
+use App\Models\RencanaPanen;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
+use App\Models\RencanaGiling;
+use App\Models\PabrikRencanaPanen;
+use App\Models\PetaniRencanaGiling;
 use App\Http\Controllers\Controller;
 
 class AdminController extends Controller
@@ -24,36 +27,32 @@ class AdminController extends Controller
 
     public function laporan()
     {
-        $pengajuanPabrik = DB::table('pabrik_rencana_panen')
-            ->join('users', 'users.id', '=', 'pabrik_rencana_panen.pabrik_id')
-            ->join('rencana_panens', 'rencana_panens.id', '=', 'pabrik_rencana_panen.rencana_panen_id')
-            ->select(
-                'users.name as nama_pabrik',
-                'pabrik_rencana_panen.status',
-                'pabrik_rencana_panen.catatan_penolakan',
-                'pabrik_rencana_panen.tanggal_diajukan',
-                'rencana_panens.jenis_tebu',
-                'rencana_panens.total_panen',
-                'rencana_panens.tanggal as tanggal_rencana',
-                DB::raw("'Panen' as jenis_rencana")
-            )
+        // Data pengajuan giling dari pabrik ke petani
+        $rencanaGilings = RencanaGiling::with(['pabrik', 'petani'])
+            ->orderBy('created_at', 'desc')
             ->get();
 
-        $pengajuanPetani = DB::table('petani_rencana_giling')
-            ->join('users', 'users.id', '=', 'petani_rencana_giling.petani_id')
-            ->join('rencana_gilings', 'rencana_gilings.id', '=', 'petani_rencana_giling.rencana_giling_id')
-            ->select(
-                'users.name as nama_petani',
-                'petani_rencana_giling.status',
-                'petani_rencana_giling.catatan_penolakan',
-                'petani_rencana_giling.tanggal_diajukan',
-                'rencana_gilings.kebutuhan_giling',
-                'rencana_gilings.tanggal as tanggal_rencana',
-                DB::raw("'Giling' as jenis_rencana")
-            )
+        // Data pengajuan panen dari petani ke pabrik
+        $rencanaPanens = RencanaPanen::with(['petani', 'pabrik'])
+            ->orderBy('created_at', 'desc')
             ->get();
 
-        return view('admin.laporan', compact('pengajuanPabrik', 'pengajuanPetani'));
+        // Data persetujuan petani terhadap pengajuan giling pabrik
+        $persetujuanGiling = PetaniRencanaGiling::with(['rencanaGiling.pabrik', 'petani'])
+            ->orderBy('tanggal_diajukan', 'desc')
+            ->get();
+
+        // Data persetujuan pabrik terhadap pengajuan panen petani
+        $persetujuanPanen = PabrikRencanaPanen::with(['rencanaPanen.petani', 'pabrik'])
+            ->orderBy('tanggal_diajukan', 'desc')
+            ->get();
+
+        return view('admin.laporan', compact(
+            'rencanaGilings',
+            'rencanaPanens',
+            'persetujuanGiling',
+            'persetujuanPanen'
+        ));
     }
 
     public function updatePengguna(Request $request, $id)

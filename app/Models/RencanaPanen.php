@@ -1,6 +1,5 @@
 <?php
 
-// app/Models/RencanaGiling.php
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -12,28 +11,26 @@ class RencanaPanen extends Model
 
     protected $fillable = [
         'user_id',
+        'target_id',
         'jenis_tebu',
         'total_panen',
         'tanggal',
         'status',
+        'catatan_penolakan'
     ];
 
-    public function user()
+    public function petani()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'user_id');
     }
 
-    public function pengaju()
+    public function pabrik()
     {
-        return $this->belongsToMany(User::class, 'pabrik_rencana_panen', 'rencana_panen_id', 'pabrik_id')
-            ->withPivot('status', 'tanggal_diajukan')
-            ->withTimestamps();
+        return $this->belongsTo(User::class, 'target_id');
     }
 
-    public function pengajuanPanen()
+    public function persetujuanPabrik()
     {
-        return $this->belongsToMany(rencanaPanen::class, 'pabrik_rencana_panen')
-            ->withPivot('status')
-            ->withTimestamps();
+        return $this->hasMany(PabrikRencanaPanen::class, 'rencana_panen_id');
     }
 }
