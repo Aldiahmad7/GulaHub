@@ -14,7 +14,7 @@ class AdminController extends Controller
 {
     public function dashboard()
     {
-        $totalUsers = User::count();
+        $totalUsers = User::where('role', '!=', 'admin')->count();
         $pabrikCount = User::where('role', 'pabrik')->count();
         $petaniCount = User::where('role', 'petani')->count();
 

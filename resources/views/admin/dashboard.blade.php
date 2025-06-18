@@ -64,7 +64,7 @@
                         </svg>
                     </div>
                     <div class="ml-4 flex-1">
-                        <p class="text-sm font-medium text-gray-500">Total Pengajuan</p>
+                        <p class="text-sm font-medium text-gray-500">Total Rencana</p>
                         <p class="text-3xl font-bold text-gray-800">{{ $totalPengajuan }}</p>
                     </div>
                 </div>

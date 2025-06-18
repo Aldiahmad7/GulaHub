@@ -4,8 +4,8 @@
 <div class="ml-64 p-6 bg-gray-50 min-h-screen">
     <div class="max-w-7xl mx-auto">
         <div class="mb-2 bg-white rounded-xl shadow-sm p-6 transition-all duration-300 hover:shadow-md">
-            <h1 class="text-2xl font-bold text-gray-800">Laporan Pengajuan</h1>
-            <p class="text-sm text-gray-500 mt-1">Daftar pengajuan antara pabrik dan petani</p>
+            <h1 class="text-2xl font-bold text-gray-800">Laporan Rencana dan Persetujuan</h1>
+            <p class="text-sm text-gray-500 mt-1">Daftar rencana dan persetujuan antara pabrik dan petani</p>
         </div>
 
         <div class="mb-6 flex border-b border-gray-200">
@@ -13,25 +13,25 @@
                 <svg class="w-4 h-4 mr-2 inline" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path>
                 </svg>
-                Pengajuan Giling Pabrik
+                Rencana Giling Pabrik
             </button>
             <button id="tabPanenPetani" class="tab-button py-2 px-4 font-medium text-sm text-gray-500 hover:text-gray-700 focus:outline-none">
                 <svg class="w-4 h-4 mr-2 inline" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path>
                 </svg>
-                Pengajuan Panen Petani
+                Rencana Panen Petani
             </button>
             <button id="tabPersetujuanGiling" class="tab-button py-2 px-4 font-medium text-sm text-gray-500 hover:text-gray-700 focus:outline-none">
                 <svg class="w-4 h-4 mr-2 inline" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
                 </svg>
-                Persetujuan Giling
+                Persetujuan Pabrik
             </button>
             <button id="tabPersetujuanPanen" class="tab-button py-2 px-4 font-medium text-sm text-gray-500 hover:text-gray-700 focus:outline-none">
                 <svg class="w-4 h-4 mr-2 inline" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
                 </svg>
-                Persetujuan Panen
+                Persetujuan Petani
             </button>
         </div>
 
@@ -43,7 +43,7 @@
                         <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path>
                         </svg>
-                        Pengajuan Giling dari Pabrik ke Petani
+                        Rencana Giling yang Dibuat Pabrik
                     </h2>
                 </div>
 
@@ -104,7 +104,7 @@
                         <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path>
                         </svg>
-                        Pengajuan Panen dari Petani ke Pabrik
+                        Rencana Panen yang Dibuat Petani
                     </h2>
                 </div>
 
@@ -169,7 +169,7 @@
                         <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
                         </svg>
-                        Persetujuan Petani terhadap Pengajuan Giling Pabrik
+                        Persetujuan Pabrik terhadap Pengajuan Petani
                     </h2>
                 </div>
 
@@ -238,7 +238,7 @@
                         <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
                         </svg>
-                        Persetujuan Pabrik terhadap Pengajuan Panen Petani
+                        Persetujuan Petani terhadap Pengajuan Pabrik
                     </h2>
                 </div>
 
