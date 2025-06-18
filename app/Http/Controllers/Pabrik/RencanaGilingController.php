@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\RencanaGiling;
 use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
 
 
 
@@ -20,7 +21,8 @@ class RencanaGilingController extends Controller
 
     $rencana = RencanaGiling::whereYear('tanggal', $tahun)
         ->where('user_id', $userId)
-        ->get();
+        ->orderBy('tanggal', 'asc')
+        ->paginate(10);
 
     $dataPerBulan = [];
 
@@ -32,6 +34,7 @@ class RencanaGilingController extends Controller
     return view('pabrik.rencanagiling', [
         'tahunDipilih' => $tahun,
         'dataPerBulan' => $dataPerBulan,
+        'rencana' => $rencana,
     ]);
     }
 
@@ -39,7 +42,7 @@ class RencanaGilingController extends Controller
     {
     $request->validate([
         'kebutuhan_giling' => 'required|string',
-        'tanggal' => 'required|date',
+        'tanggal' => 'required|date|after_or_equal:today',
     ]);
 
     RencanaGiling::create([
@@ -63,7 +66,7 @@ class RencanaGilingController extends Controller
     {
     $request->validate([
         'kebutuhan_giling' => 'required|string',
-        'tanggal' => 'required|date',
+        'tanggal' => 'required|date|after_or_equal:today',
     ]);
 
     $rencana = RencanaGiling::findOrFail($id);

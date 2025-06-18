@@ -66,7 +66,7 @@
                             </tr>
                         </thead>
                         <tbody class="bg-white divide-y divide-gray-200">
-                            @foreach($allData as $item)
+                            @foreach($rencana as $item)
                             <tr class="hover:bg-gray-50 transition-colors">
                                 <td class="px-6 py-4 whitespace-nowrap">
                                     <div class="flex items-center gap-2">
@@ -92,15 +92,13 @@
                                     <span class="text-sm font-medium text-gray-900">{{ $item->jenis_tebu }}</span>
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap">
-                                    <span class="text-sm font-medium text-gray-900">{{ $item->total_panen }} Ton</span>
+                                    <span class="text-sm font-medium text-gray-900">{{ $item->total_panen }}</span>
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap">
                                     @php
                                         $statusColors = [
                                             'Menunggu' => 'bg-yellow-100 text-yellow-800',
-                                            'Diproses' => 'bg-blue-100 text-blue-800',
                                             'Disetujui' => 'bg-green-100 text-green-800',
-                                            'Ditolak' => 'bg-red-100 text-red-800'
                                         ];
                                         $colorClass = $statusColors[$item->status] ?? 'bg-gray-100 text-gray-800';
                                     @endphp
@@ -110,21 +108,30 @@
                                 </td>
                                 <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
                                     <div class="flex items-center gap-2">
-                                        @if($item->status === 'Menunggu')
-                                        <button onclick="openModal('modalEdit{{ $item->id }}')"
-                                                class="text-blue-600 hover:text-blue-800 transition-colors flex items-center gap-1">
+                                        @php
+                                            $tanggalItem = \Carbon\Carbon::parse($item->tanggal);
+                                            $hMinus10 = \Carbon\Carbon::now()->addDays(10);
+                                            $isDisabled = $item->status !== 'Menunggu' || $tanggalItem->lessThan($hMinus10);
+                                            $hapusDisabled = $item->status !== 'Menunggu';
+                                        @endphp
+                                        {{-- @if($item->status === 'Menunggu') --}}
+                                        <button onclick="{{ $isDisabled ? '' : "openModal('modalEdit{$item->id}')" }}"
+                                                class="transition-colors flex items-center gap-1 text-blue-600 hover:text-blue-800 {{ $isDisabled ? 'opacity-50 cursor-not-allowed pointer-events-none' : '' }}"
+                                                {{ $isDisabled ? 'disabled' : '' }}>
                                             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path>
                                             </svg>
                                             Edit
                                         </button>
                                         <span class="text-gray-300">|</span>
-                                        @endif
+                                        {{-- @endif --}}
                                         <form method="POST" action="{{ route('petani.rencanapanendestroy', $item->id) }}"
                                               class="inline" onsubmit="return confirm('Yakin hapus data ini?')">
                                             @csrf
                                             @method('DELETE')
-                                            <button type="submit" class="text-red-600 hover:text-red-800 transition-colors flex items-center gap-1">
+                                            <button type="submit"
+                                                    class="text-red-600 hover:text-red-800 transition-colors flex items-center gap-1 {{ $hapusDisabled ? 'opacity-50 cursor-not-allowed pointer-events-none' : '' }}"
+                                                    {{ $hapusDisabled}}>
                                                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
                                                 </svg>
@@ -166,7 +173,8 @@
                                                         <div>
                                                             <label for="tanggal" class="block text-sm font-medium text-gray-700">Tanggal</label>
                                                             <input type="date" name="tanggal" id="tanggal" value="{{ $item->tanggal }}"
-                                                                   class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
+                                                                min="{{ date('Y-m-d') }}"
+                                                                class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
                                                         </div>
 
                                                         <div class="pt-4 flex justify-end space-x-3">
@@ -189,6 +197,9 @@
                             @endforeach
                         </tbody>
                     </table>
+                    <div class="px-6 py-4">
+                        {{ $rencana->links() }}
+                    </div>
                 </div>
             @else
                 <div class="px-6 py-12 text-center">
@@ -246,7 +257,8 @@
                             <div>
                                 <label for="tanggal" class="block text-sm font-medium text-gray-700">Tanggal</label>
                                 <input type="date" name="tanggal" id="tanggal" required
-                                       class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
+                                    min="{{ date('Y-m-d') }}"
+                                    class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
                             </div>
 
                             <div class="pt-4 flex justify-end space-x-3">

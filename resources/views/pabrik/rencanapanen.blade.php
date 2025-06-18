@@ -156,7 +156,7 @@
                 <div class="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
                     <form method="POST" action="{{ route('pabrik.ajukan', $item->id) }}" class="w-full">
                         @csrf
-                        <input type="hidden" name="tanggal" value="{{ $item->tanggal }}">
+                        <input type="hidden" name="tanggal" id="modalTanggalInput">
                         <input type="hidden" name="petani_id" value="{{ $petani->id }}">
                         <button type="submit" class="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-green-600 text-base font-medium text-white hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 sm:ml-3 sm:w-auto sm:text-sm transition-colors duration-300">
                             Ajukan ke Petani

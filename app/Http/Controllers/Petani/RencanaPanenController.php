@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\RencanaPanen;
 use App\Models\RencanaGiling;
 use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
 
 class RencanaPanenController extends Controller
 {
@@ -18,7 +19,8 @@ class RencanaPanenController extends Controller
 
     $rencana = RencanaPanen::whereYear('tanggal', $tahun)
         ->where('user_id', $userId)
-        ->get();
+        ->orderBy('tanggal', 'asc')
+        ->paginate(10);
 
     $dataPerBulan = [];
 
@@ -30,6 +32,7 @@ class RencanaPanenController extends Controller
     return view('petani.rencanapanen', [
         'tahunDipilih' => $tahun,
         'dataPerBulan' => $dataPerBulan,
+        'rencana' => $rencana,
     ]);
     }
 
@@ -38,7 +41,7 @@ class RencanaPanenController extends Controller
     $request->validate([
         'jenis_tebu' => 'required|string',
         'total_panen' => 'required|string',
-        'tanggal' => 'required|date',
+        'tanggal' => 'required|date|after_or_equal:today',
     ]);
 
     RencanaPanen::create([
@@ -64,7 +67,7 @@ class RencanaPanenController extends Controller
     $request->validate([
         'jenis_tebu' => 'required|string',
         'total_panen' => 'required|string',
-        'tanggal' => 'required|date',
+        'tanggal' => 'required|date|after_or_equal:today',
     ]);
 
     $rencana = RencanaPanen::findOrFail($id);
