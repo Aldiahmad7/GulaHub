@@ -18,6 +18,18 @@ class RencanaGiling extends Model
         'catatan_penolakan'
     ];
 
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public function pengaju()
+    {
+        return $this->belongsToMany(User::class, 'petani_rencana_giling', 'rencana_giling_id', 'petani_id')
+            ->withPivot('status', 'tanggal_diajukan')
+            ->withTimestamps();
+    }
+
     public function pabrik()
     {
         return $this->belongsTo(User::class, 'user_id');
@@ -31,5 +43,12 @@ class RencanaGiling extends Model
     public function persetujuanPetani()
     {
         return $this->hasMany(PetaniRencanaGiling::class, 'rencana_giling_id');
+    }
+
+    public function pengajuanGiling()
+    {
+        return $this->belongsToMany(RencanaGiling::class, 'petani_rencana_giling')
+            ->withPivot('status')
+            ->withTimestamps();
     }
 }

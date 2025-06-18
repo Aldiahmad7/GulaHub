@@ -12,7 +12,9 @@ use App\Http\Controllers\Petani\RencanaPanenController;
 use App\Http\Controllers\Petani\RiwayatSetorController;
 use App\Http\Controllers\Pabrik\RencanaGilingController;
 use App\Http\Controllers\Pabrik\RiwayatTerimaController;
+use App\Http\Controllers\Pabrik\DashboardPabrikController;
 use App\Http\Controllers\Pabrik\PengajuanPabrikController;
+use App\Http\Controllers\Petani\DashboardPetaniController;
 use App\Http\Controllers\Petani\PengajuanPetaniController;
 use App\Http\Controllers\Petani\PermintaanSetorController;
 use App\Http\Controllers\Pabrik\PermintaanTerimaController;
@@ -58,9 +60,8 @@ Route::middleware(['auth', RoleMiddleware::class . ':admin'])->group(function ()
 
 // PABRIK ROUTES
 Route::middleware(['auth', RoleMiddleware::class . ':pabrik'])->prefix('pabrik')->name('pabrik.')->group(function () {
-    Route::get('/dashboard', function () {
-        return view('pabrik.dashboard');
-    })->name('dashboard');
+    Route::get('/dashboard', [DashboardPabrikController::class, 'dashboard'])
+        ->name('dashboard');
 
     Route::get('/profil', [ProfilController::class, 'edit'])->name('profil');
     Route::post('/profil/update', [ProfilController::class, 'update'])->name('profil.update');
@@ -84,9 +85,8 @@ Route::middleware(['auth', RoleMiddleware::class . ':pabrik'])->prefix('pabrik')
 
 // PETANI ROUTES
 Route::middleware(['auth', RoleMiddleware::class . ':petani'])->prefix('petani')->name('petani.')->group(function () {
-    Route::get('/dashboard', function () {
-        return view('petani.dashboard');
-    })->name('dashboard');
+    Route::get('/dashboard', [DashboardPetaniController::class, 'dashboard'])
+        ->name('dashboard');
 
     Route::get('/profil', [ProfilController::class, 'edit'])->name('profil');
     Route::post('/profil/update', [ProfilController::class, 'update'])->name('profil.update');

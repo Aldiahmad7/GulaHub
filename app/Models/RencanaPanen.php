@@ -19,6 +19,18 @@ class RencanaPanen extends Model
         'catatan_penolakan'
     ];
 
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public function pengaju()
+    {
+        return $this->belongsToMany(User::class, 'pabrik_rencana_panen', 'rencana_panen_id', 'pabrik_id')
+            ->withPivot('status', 'tanggal_diajukan')
+            ->withTimestamps();
+    }
+
     public function petani()
     {
         return $this->belongsTo(User::class, 'user_id');
@@ -27,6 +39,13 @@ class RencanaPanen extends Model
     public function pabrik()
     {
         return $this->belongsTo(User::class, 'target_id');
+    }
+
+    public function pengajuanPanen()
+    {
+        return $this->belongsToMany(rencanaPanen::class, 'pabrik_rencana_panen')
+            ->withPivot('status')
+            ->withTimestamps();
     }
 
     public function persetujuanPabrik()

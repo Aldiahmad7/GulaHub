@@ -3,20 +3,25 @@
 namespace App\Http\Controllers\Pabrik;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use App\Models\RencanaPanen;
 use App\Models\RencanaGiling;
-use Illuminate\Support\Facades\DB;
+use App\Models\PabrikRencanaPanen;
 
-class DasboardPabrikController extends Controller
+class DashboardPabrikController extends Controller
 {
-
-    public function dashboardPabrik()
+    public function dashboard()
     {
         $pabrik = Auth::user();
 
-        return view('pabrik.dashboard', compact('pabrik'));
-    }
+        $data = [
+            'pabrik' => $pabrik,
+            'totalRencanaGiling' => RencanaGiling::where('user_id', $pabrik->id)->count(),
+            'rencanaGilingTerbaru' => RencanaGiling::where('user_id', $pabrik->id)
+                                            ->latest()
+                                            ->take(5)
+                                            ->get(),
+        ];
 
+        return view('pabrik.dashboard', $data);
+    }
 }

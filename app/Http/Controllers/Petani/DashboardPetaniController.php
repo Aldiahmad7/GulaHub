@@ -3,20 +3,25 @@
 namespace App\Http\Controllers\Petani;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\RencanaPanen;
-use App\Models\RencanaGiling;
-use Illuminate\Support\Facades\DB;
+use App\Models\PetaniRencanaGiling;
 
 class DashboardPetaniController extends Controller
 {
-
-    public function dashboardPetani()
+    public function dashboard()
     {
         $petani = Auth::user();
 
-        return view('petani.dashboard', compact('petani'));
-    }
+        $data = [
+            'petani' => $petani,
+            'totalRencanaPanen' => RencanaPanen::where('user_id', $petani->id)->count(),
+            'rencanaPanenTerbaru' => RencanaPanen::where('user_id', $petani->id)
+                                            ->latest()
+                                            ->take(5)
+                                            ->get(),
+        ];
 
+        return view('petani.dashboard', $data);
+    }
 }
