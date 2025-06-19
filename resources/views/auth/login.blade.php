@@ -11,6 +11,14 @@
 
                     <form class="space-y-6" action="{{ route('login.post') }}" method="POST">
                         @csrf
+
+                        @if(session('error'))
+                            <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
+                                <strong class="font-bold">Gagal login!</strong>
+                                <span class="block sm:inline">{{ session('error') }}</span>
+                            </div>
+                        @endif
+
                         <div>
                             <label for="email" class="block text-sm font-medium text-gray-700 mb-2">
                                 <i class="fas fa-envelope text-green-600 mr-2"></i>
@@ -93,7 +101,6 @@
             }
         }
 
-        // Validasi email saat blur
         document.getElementById('email').addEventListener('blur', function () {
             const email = this.value;
             const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -107,7 +114,6 @@
             }
         });
 
-        // Form submit dengan loading simulasi, lalu submit
         document.querySelector('form').addEventListener('submit', function (e) {
             e.preventDefault();
 

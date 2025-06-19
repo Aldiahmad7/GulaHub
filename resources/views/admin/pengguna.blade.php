@@ -4,8 +4,8 @@
 <div class="ml-64 p-6 bg-gray-50 min-h-screen">
     <div class="max-w-7xl mx-auto">
         <div class="mb-2 bg-white rounded-xl shadow-sm p-6 transition-all duration-300 hover:shadow-md">
-            <h1 class="text-2xl font-bold text-gray-800">Manajemen Pengguna</h1>
-            <p class="text-sm text-gray-500 mt-1">Kelola akun pabrik dan petani</p>
+            <h1 class="text-2xl font-bold text-gray-800">Daftar Pengguna</h1>
+            <p class="text-sm text-gray-500 mt-1">Daftar akun pabrik dan petani</p>
         </div>
 
         <div class="mb-6 flex border-b border-gray-200">

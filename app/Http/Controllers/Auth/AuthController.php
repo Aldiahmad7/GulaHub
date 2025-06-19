@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
 use App\Models\User;
 
 class AuthController extends Controller
@@ -77,12 +78,20 @@ class AuthController extends Controller
 
     public function registerPabrik(Request $request)
     {
-        $request->validate([
+        $validator = Validator::make($request->all(), [
             'name' => 'required|string|max:255',
             'alamat' => 'required|string',
-            'email' => 'required|email|unique:users',
+            'email' => 'required|email|unique:users,email',
             'password' => 'required|string|min:5',
         ]);
+
+        if ($validator->fails()) {
+            if ($validator->errors()->has('email')) {
+                return back()->with('error', 'Email sudah terdaftar!')->withInput();
+            }
+
+            return back()->withErrors($validator)->withInput();
+        }
 
         User::create([
             'name' => $request->name,
@@ -97,12 +106,20 @@ class AuthController extends Controller
 
     public function registerPetani(Request $request)
     {
-        $request->validate([
+        $validator = Validator::make($request->all(), [
             'name' => 'required|string|max:255',
             'alamat' => 'required|string',
-            'email' => 'required|email|unique:users',
+            'email' => 'required|email|unique:users,email',
             'password' => 'required|string|min:5',
         ]);
+
+        if ($validator->fails()) {
+            if ($validator->errors()->has('email')) {
+                return back()->with('error', 'Email sudah terdaftar!')->withInput();
+            }
+
+            return back()->withErrors($validator)->withInput();
+        }
 
         User::create([
             'name' => $request->name,
