@@ -5,19 +5,15 @@ namespace App\Http\Controllers\Pabrik;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use App\Models\RencanaGiling;
 use Illuminate\Support\Facades\DB;
-
-
+use App\Models\RencanaGiling;
 
 class PermintaanTerimaController extends Controller
 {
-
     public function permintaanTerima()
     {
-        $pabrikId = Auth::user()->id; // Ambil ID pabrik yang login
+        $pabrikId = Auth::id();
 
-        // Ambil hanya rencana giling milik pabrik ini
         $rencanaDenganPengajuan = RencanaGiling::where('user_id', $pabrikId)
             ->whereHas('pengaju', function ($query) {
                 $query->where('petani_rencana_giling.status', 'Menunggu Persetujuan');
@@ -30,32 +26,33 @@ class PermintaanTerimaController extends Controller
         return view('pabrik.permintaan', compact('rencanaDenganPengajuan'));
     }
 
-
     public function konfirmasiAjuan(Request $request, $rencanaGilingId, $petaniId)
     {
         $status = $request->input('status'); // "Disetujui" atau "Ditolak"
         $catatan = $request->input('catatan_penolakan');
+
         DB::beginTransaction();
         try {
             $updateData = ['status' => $status];
-            if ($status === 'Ditolak'&& $catatan) {
+            if ($status === 'Ditolak' && $catatan) {
                 $updateData['catatan_penolakan'] = $catatan;
             }
 
-            // Update status dan catatan penolakan (jika ada) untuk petani yang dikonfirmasi
             DB::table('petani_rencana_giling')
                 ->where('rencana_giling_id', $rencanaGilingId)
                 ->where('petani_id', $petaniId)
                 ->update($updateData);
 
             if ($status === 'Disetujui') {
-                // Tolak semua pengajuan lain yang belum disetujui
                 DB::table('petani_rencana_giling')
                     ->where('rencana_giling_id', $rencanaGilingId)
                     ->where('petani_id', '!=', $petaniId)
-                    ->update(['status' => 'Ditolak', ]);
+                    ->where('status', 'Menunggu Persetujuan')
+                    ->update([
+                        'status' => 'Ditolak',
+                        'catatan_penolakan' => 'Saya sudah menerima ajuan petani lain',
+                    ]);
 
-                // Set status utama di rencana_giling
                 RencanaGiling::where('id', $rencanaGilingId)
                     ->update(['status' => 'Disetujui']);
             }

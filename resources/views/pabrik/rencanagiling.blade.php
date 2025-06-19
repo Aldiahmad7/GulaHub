@@ -94,7 +94,6 @@
                                     @php
                                         $statusColors = [
                                             'Menunggu' => 'bg-yellow-100 text-yellow-800',
-                                            'proses' => 'bg-blue-100 text-blue-800',
                                             'Disetujui' => 'bg-green-100 text-green-800'
                                         ];
                                         $colorClass = $statusColors[$item->status] ?? 'bg-gray-100 text-gray-800';
@@ -232,7 +231,6 @@
                             <div>
                                 <label for="tambah_kebutuhan_giling" class="block text-sm font-medium text-gray-700">Kebutuhan Giling (TON)</label>
                                 <input type="text" name="kebutuhan_giling" id="tambah_kebutuhan_giling" required
-                                    min="{{ date('Y-m-d') }}"
                                     class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
                                     placeholder="Masukkan kebutuhan giling">
                             </div>
@@ -240,7 +238,8 @@
                             <div>
                                 <label for="tambah_tanggal" class="block text-sm font-medium text-gray-700">Tanggal</label>
                                 <input type="date" name="tanggal" id="tambah_tanggal" required
-                                       class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
+                                    min="{{ date('Y-m-d') }}"
+                                    class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
                             </div>
 
                             <div class="pt-4 flex justify-end space-x-3">

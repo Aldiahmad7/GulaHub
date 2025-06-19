@@ -39,17 +39,24 @@ class PermintaanSetorController extends Controller
                 $updateData['catatan_penolakan'] = $catatan;
             }
 
+            // Update status untuk pabrik yang dikonfirmasi
             DB::table('pabrik_rencana_panen')
                 ->where('rencana_panen_id', $rencanaPanenId)
                 ->where('pabrik_id', $pabrikId)
                 ->update($updateData);
 
             if ($status === 'Disetujui') {
+                // Tolak semua pabrik lain dalam rencana yang sama
                 DB::table('pabrik_rencana_panen')
                     ->where('rencana_panen_id', $rencanaPanenId)
                     ->where('pabrik_id', '!=', $pabrikId)
-                    ->update(['status' => 'Ditolak']);
+                    ->where('status', 'Menunggu Persetujuan')
+                    ->update([
+                        'status' => 'Ditolak',
+                        'catatan_penolakan' => 'Saya sudah menerima ajuan pabrik lain',
+                    ]);
 
+                // Update status utama rencana panen
                 RencanaPanen::where('id', $rencanaPanenId)
                     ->update(['status' => 'Disetujui']);
             }
@@ -61,6 +68,5 @@ class PermintaanSetorController extends Controller
             return back()->with('error', 'Terjadi kesalahan: ' . $e->getMessage());
         }
     }
-
 
 }
