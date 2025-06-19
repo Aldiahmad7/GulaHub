@@ -41,7 +41,7 @@
                                 <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Nama</th>
                                 <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Email</th>
                                 <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Alamat</th>
-                                <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">Aksi</th>
+                                {{-- <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">Aksi</th> --}}
                             </tr>
                         </thead>
                         <tbody class="bg-white divide-y divide-gray-200">
@@ -50,7 +50,7 @@
                                 <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{{ $user->name }}</td>
                                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ $user->email }}</td>
                                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ $user->alamat }}</td>
-                                <td class="px-6 py-4 whitespace-nowrap text-center">
+                                {{-- <td class="px-6 py-4 whitespace-nowrap text-center">
                                     <div class="flex justify-center space-x-2">
                                         <button class="btnHapus text-red-600 hover:text-red-800 p-1 rounded-full hover:bg-red-50 transition-colors"
                                                 data-id="{{ $user->id }}">
@@ -59,7 +59,7 @@
                                             </svg>
                                         </button>
                                     </div>
-                                </td>
+                                </td> --}}
                             </tr>
                             @endforeach
                         </tbody>
@@ -86,7 +86,7 @@
                                 <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Nama</th>
                                 <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Email</th>
                                 <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Alamat</th>
-                                <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">Aksi</th>
+                                {{-- <th scope="col" class="px-6 py-3 text-center text-xs font-medium text-gray-500 uppercase tracking-wider">Aksi</th> --}}
                             </tr>
                         </thead>
                         <tbody class="bg-white divide-y divide-gray-200">
@@ -95,7 +95,7 @@
                                 <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{{ $user->name }}</td>
                                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ $user->email }}</td>
                                 <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ $user->alamat }}</td>
-                                <td class="px-6 py-4 whitespace-nowrap text-center">
+                                {{-- <td class="px-6 py-4 whitespace-nowrap text-center">
                                     <div class="flex justify-center space-x-2">
                                         <button class="btnHapus text-red-600 hover:text-red-800 p-1 rounded-full hover:bg-red-50 transition-colors"
                                                 data-id="{{ $user->id }}">
@@ -104,7 +104,7 @@
                                             </svg>
                                         </button>
                                     </div>
-                                </td>
+                                </td> --}}
                             </tr>
                             @endforeach
                         </tbody>
@@ -116,7 +116,7 @@
 </div>
 
 <!-- Modal Hapus -->
-<div id="modalHapus" class="fixed inset-0 z-50 hidden overflow-y-auto">
+{{-- <div id="modalHapus" class="fixed inset-0 z-50 hidden overflow-y-auto">
     <div class="flex items-center justify-center min-h-screen pt-4 px-4 pb-20 text-center sm:block sm:p-0">
         <div class="fixed inset-0 transition-opacity" aria-hidden="true" onclick="closeModal('modalHapus')">
             <div class="absolute inset-0 bg-gray-500 opacity-75"></div>
@@ -148,7 +148,7 @@
             </div>
         </div>
     </div>
-</div>
+</div> --}}
 
 <script>
 document.addEventListener('DOMContentLoaded', function () {
