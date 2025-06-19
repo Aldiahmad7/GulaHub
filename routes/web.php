@@ -5,7 +5,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Middleware\RoleMiddleware;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Admin\AdminController;
-use App\Http\Controllers\Pabrik\ProfilController;
+use App\Http\Controllers\Pabrik\ProfilPabrikController;
+use App\Http\Controllers\Petani\ProfilPetaniController;
 use App\Http\Controllers\Pabrik\JadwalPanenController;
 use App\Http\Controllers\Petani\JadwalGilingController;
 use App\Http\Controllers\Petani\RencanaPanenController;
@@ -63,8 +64,8 @@ Route::middleware(['auth', RoleMiddleware::class . ':pabrik'])->prefix('pabrik')
     Route::get('/dashboard', [DashboardPabrikController::class, 'dashboard'])
         ->name('dashboard');
 
-    Route::get('/profil', [ProfilController::class, 'edit'])->name('profil');
-    Route::post('/profil/update', [ProfilController::class, 'update'])->name('profil.update');
+    Route::get('/profil', [ProfilPabrikController::class, 'edit'])->name('profil');
+    Route::post('/profil/update', [ProfilPabrikController::class, 'update'])->name('profil.update');
 
     Route::get('/jadwalpanen', [JadwalPanenController::class, 'jadwalPanen'])->name('jadwalpanen');
     Route::get('/rencanapanen/{id}', [JadwalPanenController::class, 'rencanaPanenByPabrik'])->name('rencanapanen');
@@ -88,8 +89,8 @@ Route::middleware(['auth', RoleMiddleware::class . ':petani'])->prefix('petani')
     Route::get('/dashboard', [DashboardPetaniController::class, 'dashboard'])
         ->name('dashboard');
 
-    Route::get('/profil', [ProfilController::class, 'edit'])->name('profil');
-    Route::post('/profil/update', [ProfilController::class, 'update'])->name('profil.update');
+    Route::get('/profil', [ProfilPetaniController::class, 'edit'])->name('profil');
+    Route::post('/profil/update', [ProfilPetaniController::class, 'update'])->name('profil.update');
 
     Route::get('/jadwalgiling', [JadwalGilingController::class, 'jadwalGiling'])->name('jadwalgiling');
     Route::get('/rencanagiling/{id}', [JadwalGilingController::class, 'rencanaGilingByPetani'])->name('rencanagiling');

@@ -1,18 +1,17 @@
 <?php
 
-namespace App\Http\Controllers\Pabrik;
+namespace App\Http\Controllers\Petani;
 
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 
-class ProfilController extends Controller
-
+class ProfilPetaniController extends Controller
 {
     public function edit()
     {
         $user = Auth::user();
-        return view('pabrik.profil', compact('user'));
+        return view('petani.profil', compact('user'));
     }
 
     public function update(Request $request)
@@ -25,6 +24,6 @@ class ProfilController extends Controller
 
         \App\Models\User::where('id', Auth::id())->update($validated);
 
-        return redirect()->route('pabrik.profil')->with('success', 'Profil berhasil diperbarui.');
+        return redirect()->route('petani.profil')->with('success', 'Profil berhasil diperbarui.');
     }
 }

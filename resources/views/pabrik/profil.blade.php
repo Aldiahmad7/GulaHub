@@ -99,6 +99,7 @@
                     <form action="{{ route('pabrik.profil.update') }}" method="POST" class="space-y-6">
                         @csrf
 
+
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                             <div>
                                 <label for="name" class="flex items-center text-sm font-semibold text-gray-700 mb-3">
